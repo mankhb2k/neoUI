@@ -1,0 +1,41 @@
+.home { width: min(100%, 1120px); margin: 0 auto; padding: clamp(42px, 7vw, 86px) clamp(20px, 4vw, 40px) 72px; }
+.hero { margin-bottom: clamp(32px, 5vw, 55px); }
+.hero h1 { margin: 0; font-size: clamp(34px, 6vw, 64px); line-height: 1.08; letter-spacing: -.06em; font-weight: 760; }
+.hero h1 span { color: var(--accent); }
+.hero p { max-width: 580px; margin: 15px 0 0; color: var(--muted); font-size: clamp(14px, 1.65vw, 16px); line-height: 1.7; }
+.heading { margin: 0 0 14px; font-size: 16px; font-weight: 700; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px; }
+.library { position: relative; min-width: 0; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); }
+.library:hover { border-color: var(--accent); }
+.library:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
+.preview {
+  min-height: 230px;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  color: var(--foreground);
+  background:
+    radial-gradient(ellipse at 50% 90%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 70%),
+    radial-gradient(circle, color-mix(in srgb, var(--foreground) 17%, transparent) 1px, transparent 1px) 0 0 / 18px 18px,
+    var(--background);
+}
+.preview[data-neo-style="minimal"] {
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--foreground) 12%, transparent) 1px, transparent 1px) 0 0 / 18px 18px,
+    var(--background);
+}
+.example { width: min(100%, 310px); }
+.exampleIcon { width: 33px; height: 33px; display: grid; place-items: center; margin-bottom: 5px; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--secondary); color: var(--accent); }
+.exampleActions { display: flex; flex-wrap: wrap; gap: 8px; }
+.details { padding: 16px 19px; }
+.libraryTitle { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; }
+.libraryTitle h3 { margin: 0; font-size: 19px; line-height: 1.3; }
+.libraryTitle a { color: inherit; text-decoration: none; }
+.libraryTitle a::after { position: absolute; inset: 0; content: ""; }
+.libraryTitle a:focus-visible { outline: none; }
+.details p { margin: 7px 0 0; color: var(--muted); line-height: 1.55; }
+.defaultTag { padding: 3px 7px; border-radius: 4px; background: color-mix(in srgb, var(--accent) 13%, transparent); color: var(--accent); font-size: 11px; font-weight: 650; }
+.libraryFooter { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; padding-top: 11px; border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent); color: var(--muted); font-size: 12px; }
+.libraryFooter svg { color: var(--accent); }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 640px) { .grid { grid-template-columns: 1fr; } .preview { min-height: 210px; } }

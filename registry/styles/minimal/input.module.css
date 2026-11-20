@@ -1,0 +1,14 @@
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  padding: 0 13px;
+  background: var(--surface);
+  color: var(--foreground);
+  font: inherit;
+}
+.input::placeholder { color: var(--muted); }
+.input:focus { border-color: var(--accent); outline: 2px solid var(--accent); outline-offset: 2px; }
+.input:disabled { opacity: .55; cursor: not-allowed; }

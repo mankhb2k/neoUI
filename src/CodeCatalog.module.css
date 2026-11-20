@@ -1,0 +1,104 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #292f35;
+  border-radius: 11px;
+  background: #111417;
+}
+
+.cardHeader {
+  min-height: 72px;
+  padding: 13px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #252a30;
+}
+
+.fileName {
+  color: #e9edf1;
+  font: 600 12px/1.4 "Noto Sans", sans-serif;
+}
+
+.cardHeader p {
+  margin: 5px 0 0;
+  color: #7e8994;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.copyButton {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  border: 1px solid #35414a;
+  border-radius: 7px;
+  background: #192127;
+  color: #86dcff;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.copyButton:hover { background: #20313a; border-color: #416170; }
+
+.preview {
+  min-height: 138px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #252a30;
+  background: radial-gradient(ellipse at 50% 0, #18232a, #101316 70%);
+}
+
+.buttonPreview { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.preview button { gap: 7px !important; }
+
+.preview > section { width: 100%; }
+
+.cardMeta { color: #75818b; font-size: 10px; }
+
+.source summary {
+  min-height: 40px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #a9b3bc;
+  font-size: 10px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.source summary::-webkit-details-marker { display: none; }
+.source summary code { margin-left: auto; color: #65727d; font-size: 9px; }
+.source[open] summary svg { transform: rotate(180deg); }
+
+.source pre {
+  max-height: 360px;
+  overflow: auto;
+  margin: 0;
+  padding: 14px 15px 17px;
+  border-top: 1px solid #252a30;
+  background: #0b0e10;
+  color: #bdcad2;
+  font: 10px/1.7 Consolas, "Courier New", monospace;
+  tab-size: 2;
+}
+
+.source pre code { white-space: pre; }
+
+@media (max-width: 720px) {
+  .grid { grid-template-columns: 1fr; }
+  .preview { padding: 15px; }
+}

@@ -1,0 +1,29 @@
+[data-neo-style="obsidian"][data-theme="light"] {
+  color-scheme: light;
+  --background: #f5f7fa;
+  --surface: #ffffff;
+  --foreground: #18202b;
+  --muted: #657185;
+  --border: #d8dee8;
+  --accent: #087eae;
+  --accent-hover: #06678e;
+  --accent-foreground: #ffffff;
+  --secondary: #eaf0f6;
+  --radius-control: 8px;
+  --radius-card: 14px;
+}
+
+[data-neo-style="obsidian"][data-theme="dark"] {
+  color-scheme: dark;
+  --background: #101318;
+  --surface: #181d25;
+  --foreground: #f1f5f9;
+  --muted: #a0acbc;
+  --border: #374253;
+  --accent: #38bdf8;
+  --accent-hover: #7dd3fc;
+  --accent-foreground: #082130;
+  --secondary: #262f3d;
+  --radius-control: 8px;
+  --radius-card: 14px;
+}

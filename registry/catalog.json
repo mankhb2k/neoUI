@@ -1,0 +1,61 @@
+{
+  "defaultStyle": "obsidian",
+  "styles": [
+    {
+      "name": "obsidian",
+      "label": "Premium",
+      "description": "Layered dark surfaces, soft corners, and a cyan accent.",
+      "modes": ["light", "dark"],
+      "color": "#38BDF8",
+      "colors": [
+        "#101318",
+        "#181D25",
+        "#38BDF8"
+      ]
+    },
+    {
+      "name": "minimal",
+      "label": "Minimal",
+      "description": "Light neutral surfaces, crisp borders, and monochrome controls.",
+      "modes": ["light", "dark"],
+      "color": "#E7E7E7",
+      "colors": [
+        "#F5F5F5",
+        "#FFFFFF",
+        "#1C1C1C"
+      ]
+    }
+  ],
+  "components": [
+    {
+      "name": "button",
+      "label": "Button",
+      "description": "Trigger an action with three levels of emphasis.",
+      "category": "Actions",
+      "files": [
+        "button.tsx",
+        "button.module.css"
+      ]
+    },
+    {
+      "name": "card",
+      "label": "Card",
+      "description": "Group related content in a reusable surface.",
+      "category": "Layout",
+      "files": [
+        "card.tsx",
+        "card.module.css"
+      ]
+    },
+    {
+      "name": "input",
+      "label": "Input",
+      "description": "Collect short text in a standard form field.",
+      "category": "Forms",
+      "files": [
+        "input.tsx",
+        "input.module.css"
+      ]
+    }
+  ]
+}

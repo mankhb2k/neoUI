@@ -1,0 +1,53 @@
+.header {
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+}
+
+.inner {
+  max-width: 1380px;
+  min-height: 64px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand,
+.components {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.brand { font-size: 16px; font-weight: 750; }
+
+.brand span {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-control);
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.components { font-size: 13px; font-weight: 650; }
+.components svg { color: var(--accent); }
+.components:hover { color: var(--accent); }
+
+.themeToggle {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.themeToggle:hover { border-color: var(--accent); }
