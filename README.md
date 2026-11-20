@@ -31,4 +31,4 @@ Lệnh `add` chép source TSX gốc và CSS Module của component đã chọn v
 
 ## Thêm style vào thư viện
 
-Tạo thư mục trong `registry/styles/` chứa `globals.css`, các file TSX và CSS Module tương ứng. Khai báo style trong `registry/catalog.json`, import token trong `app/layout.tsx` và đăng ký các component trong `src/catalog-previews.ts`.
+Mỗi style có `globals.css` và một thư mục cho từng component, ví dụ `registry/styles/obsidian/button/button.tsx` cùng `button.module.css`. Khai báo đường dẫn component trong `registry/catalog.json` và đăng ký bản xem trước trong `src/catalog-previews.ts`.

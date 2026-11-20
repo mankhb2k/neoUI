@@ -33,8 +33,8 @@
       "description": "Trigger an action with three levels of emphasis.",
       "category": "Actions",
       "files": [
-        "button.tsx",
-        "button.module.css"
+        "button/button.tsx",
+        "button/button.module.css"
       ]
     },
     {
@@ -43,8 +43,8 @@
       "description": "Group related content in a reusable surface.",
       "category": "Layout",
       "files": [
-        "card.tsx",
-        "card.module.css"
+        "card/card.tsx",
+        "card/card.module.css"
       ]
     },
     {
@@ -53,8 +53,8 @@
       "description": "Collect short text in a standard form field.",
       "category": "Forms",
       "files": [
-        "input.tsx",
-        "input.module.css"
+        "input/input.tsx",
+        "input/input.module.css"
       ]
     }
   ]

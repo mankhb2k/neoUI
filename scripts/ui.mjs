@@ -114,6 +114,7 @@ async function installFiles(files, destination) {
   const installed = [];
   try {
     for (const { source, target } of targets) {
+      await mkdir(path.dirname(target), { recursive: true });
       await copyFile(source, target, constants.COPYFILE_EXCL);
       installed.push(target);
     }
