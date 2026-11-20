@@ -6,11 +6,11 @@
       "label": "Premium",
       "description": "Layered dark surfaces, soft corners, and a cyan accent.",
       "modes": ["light", "dark"],
-      "color": "#38BDF8",
+      "color": "#19AEF6",
       "colors": [
         "#101318",
         "#181D25",
-        "#38BDF8"
+        "#19AEF6"
       ]
     },
     {
