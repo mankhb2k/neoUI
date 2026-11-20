@@ -1,46 +1,116 @@
+#!/usr/bin/env node
+
 import { constants } from "node:fs";
-import { access, copyFile, mkdir, readFile, unlink } from "node:fs/promises";
+import { access, copyFile, mkdir, readFile, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const catalog = JSON.parse(await readFile(new URL("../registry/catalog.json", import.meta.url), "utf8"));
+const registryUrl = new URL("../registry/catalog.json", import.meta.url);
+const catalog = JSON.parse(await readFile(registryUrl, "utf8"));
 const [command, ...args] = process.argv.slice(2);
+const styleAliases = new Map([
+  ["premium", "obsidian"],
+  ["obsidian", "obsidian"],
+  ["minimal", "minimal"],
+]);
 
-function help() {
+function showHelp() {
   console.log(`Neonix UI
 
-  npm run ui -- list [--style <style>]
-  npm run ui -- add <component> [--style <style>] [--path components/ui]
-  npm run ui -- tokens [--style <style>] [--path app]`);
+  npx --yes --package=github:mankhb2k/neoUI neonix init [--style premium|minimal] [--mode light|dark]
+  npx --yes --package=github:mankhb2k/neoUI neonix add <component|--all> [--style premium|minimal]
+  npx --yes --package=github:mankhb2k/neoUI neonix list`);
 }
 
-function readOptions(args) {
+function readOptions(values, allowedFlags) {
   const options = {};
-  for (let index = 0; index < args.length; index += 2) {
-    const [flag, value] = args.slice(index, index + 2);
-    if (!["--style", "--path"].includes(flag) || !value || value.startsWith("--") || flag in options) {
+  for (let index = 0; index < values.length; index += 1) {
+    const flag = values[index];
+    if (!allowedFlags.includes(flag) || flag in options) {
       throw new Error(`Invalid option: ${flag}`);
     }
+    if (flag === "--all") {
+      options[flag] = true;
+      continue;
+    }
+    const value = values[index + 1];
+    if (!value || value.startsWith("--")) throw new Error(`Missing value for ${flag}`);
     options[flag] = value;
+    index += 1;
   }
   return options;
 }
 
-async function install(style, files, directory) {
+function resolveStyle(value = "premium") {
+  const name = styleAliases.get(value.toLowerCase());
+  if (!name) throw new Error(`Unknown style: ${value}. Choose premium or minimal.`);
+  return name;
+}
+
+async function resolveAppDirectory(option) {
+  const sourceApp = path.join(process.cwd(), "src", "app");
+  const defaultApp = path.join(process.cwd(), "app");
+  const directory = option ?? (await pathExists(sourceApp) ? "src/app" : "app");
   if (path.isAbsolute(directory) || directory.split(/[\\/]/).includes("..")) {
-    throw new Error("--path must be relative to the current project.");
+    throw new Error("--app-dir must be a relative directory inside the current project.");
   }
-  const destination = path.resolve(directory);
-  const targets = files.map(({ source, name = source }) => ({
-    source: new URL(`../registry/styles/${style}/${source}`, import.meta.url),
-    target: path.join(destination, name),
+  return path.resolve(directory);
+}
+
+async function pathExists(target) {
+  return access(target).then(() => true, (error) => {
+    if (error.code !== "ENOENT") throw error;
+    return false;
+  });
+}
+
+function createProjectTokens(style, defaultMode) {
+  const tokenUrl = new URL(`../registry/styles/${style}/globals.css`, import.meta.url);
+  const defaultSelector = defaultMode === "dark"
+    ? ':root:not([data-theme]), :root[data-theme="dark"]'
+    : ':root:not([data-theme]), :root[data-theme="light"]';
+  return readFile(tokenUrl, "utf8").then((source) => source
+    .replace(/\[data-neo-style="[^"]+"\]\[data-theme="light"\]/g,
+      defaultMode === "light" ? defaultSelector : ':root[data-theme="light"]')
+    .replace(/\[data-neo-style="[^"]+"\]\[data-theme="dark"\]/g,
+      defaultMode === "dark" ? defaultSelector : ':root[data-theme="dark"]'));
+}
+
+async function init(options) {
+  const style = resolveStyle(options["--style"]);
+  const mode = options["--mode"] ?? "dark";
+  if (!catalog.styles.some((item) => item.name === style)) throw new Error(`Unknown style: ${style}`);
+  if (!catalog.styles.find((item) => item.name === style).modes.includes(mode)) {
+    throw new Error("--mode must be light or dark.");
+  }
+
+  const appDirectory = await resolveAppDirectory(options["--app-dir"]);
+  const globalsFile = path.join(appDirectory, "globals.css");
+  const componentDirectory = path.resolve("components/ui");
+  const projectConfig = path.resolve("neonix.json");
+
+  await mkdir(appDirectory, { recursive: true });
+  await mkdir(componentDirectory, { recursive: true });
+  await writeFile(globalsFile, await createProjectTokens(style, mode), "utf8");
+  await writeFile(projectConfig, `${JSON.stringify({ style, mode }, null, 2)}\n`, "utf8");
+
+  console.log(`Initialized ${catalog.styles.find((item) => item.name === style).label} (${mode}).`);
+  console.log(`Replaced ${path.relative(process.cwd(), globalsFile)} with the selected theme tokens.`);
+  console.log(`Created ${path.relative(process.cwd(), componentDirectory)}.`);
+  console.log("Use data-theme=\"light\" or data-theme=\"dark\" on <html> to switch token modes.");
+}
+
+async function installFiles(files, destination) {
+  const targets = files.map((file) => ({
+    source: new URL(`../registry/styles/${file.style}/${file.name}`, import.meta.url),
+    target: path.join(destination, file.name),
   }));
+
   for (const { target } of targets) {
-    const exists = await access(target).then(() => true, (error) => {
-      if (error.code !== "ENOENT") throw error;
-      return false;
-    });
-    if (exists) throw new Error(`File already exists: ${path.relative(process.cwd(), target)}`);
+    if (await pathExists(target)) {
+      throw new Error(`File already exists: ${path.relative(process.cwd(), target)}`);
+    }
   }
+
   await mkdir(destination, { recursive: true });
   const installed = [];
   try {
@@ -52,37 +122,59 @@ async function install(style, files, directory) {
     await Promise.allSettled(installed.map((target) => unlink(target)));
     throw error;
   }
+
   for (const target of installed) console.log(`Added ${path.relative(process.cwd(), target)}`);
+}
+
+async function addComponent(name, options) {
+  const configPath = path.resolve("neonix.json");
+  const projectConfig = await pathExists(configPath)
+    ? JSON.parse(await readFile(configPath, "utf8"))
+    : {};
+  const style = resolveStyle(options["--style"] ?? projectConfig.style ?? "premium");
+  const selected = options["--all"]
+    ? catalog.components
+    : catalog.components.filter((component) => component.name === name);
+
+  if (!selected.length) {
+    throw new Error(name ? `Unknown component: ${name}. Run neonix list to see available components.` : "Choose a component or use --all.");
+  }
+
+  await installFiles(
+    selected.flatMap((component) => component.files.map((file) => ({ style, name: file }))),
+    path.resolve("components/ui"),
+  );
 }
 
 async function run() {
   if (!command || command === "--help" || command === "-h") {
-    help();
+    showHelp();
     return;
   }
-  if (!["list", "add", "tokens"].includes(command)) throw new Error(`Unknown command: ${command}`);
-  const [name, ...addOptions] = args;
-  const options = readOptions(command === "add" ? addOptions : args);
-  const style = options["--style"] ?? catalog.defaultStyle;
-  if (!catalog.styles.some((item) => item.name === style)) {
-    throw new Error(`Unknown style: ${style}`);
-  }
+
   if (command === "list") {
-    if (options["--path"]) throw new Error("--path is only available with add and tokens.");
-    console.log(`Styles: ${catalog.styles.map((item) => item.name).join(", ")}\nComponents (${style}):`);
-    for (const item of catalog.components) console.log(`  ${item.name.padEnd(10)} ${item.description}`);
+    console.log("Styles: premium, minimal\nComponents:");
+    for (const component of catalog.components) {
+      console.log(`  ${component.name.padEnd(10)} ${component.description}`);
+    }
     return;
   }
-  if (command === "tokens") {
-    const file = `neonix-${style}.css`;
-    await install(style, [{ source: "globals.css", name: file }], options["--path"] ?? "app");
-    console.log(`Import ${file} from your root layout and set data-neo-style="${style}" plus data-theme="light" or "dark" on <html> or a wrapper.`);
+
+  if (command === "init") {
+    await init(readOptions(args, ["--style", "--mode", "--app-dir"]));
     return;
   }
-  const component = catalog.components.find((item) => item.name === name);
-  if (!component) throw new Error(name ? `Unknown component: ${name}` : "Specify a component. Run list to see what's available.");
-  await install(style, component.files.map((source) => ({ source })), options["--path"] ?? "components/ui");
-  console.log(`Use the ${style} tokens alongside this component.`);
+
+  if (command === "add") {
+    const isAddingAll = args[0] === "--all";
+    const [name, ...optionArgs] = isAddingAll ? [undefined, ...args] : args;
+    const options = readOptions(optionArgs, ["--style", "--all"]);
+    if (isAddingAll) options["--all"] = true;
+    await addComponent(name, options);
+    return;
+  }
+
+  throw new Error(`Unknown command: ${command}`);
 }
 
 try {

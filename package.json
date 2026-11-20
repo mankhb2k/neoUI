@@ -3,6 +3,17 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "bin": {
+    "neonix": "scripts/ui.mjs"
+  },
+  "files": [
+    "registry/",
+    "scripts/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mankhb2k/neoUI.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

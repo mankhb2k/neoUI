@@ -13,21 +13,21 @@ npm run dev
 
 Mặc định, mở `http://localhost:3000`.
 
-## Dùng trong một dự án Next.js khác
+## Cài theme vào dự án Next.js
 
-Sao chép hai file của component vào cùng một thư mục. Thêm CSS ở trang **Design tokens** vào `app/globals.css`, rồi đặt `data-neo-style="minimal"` và `data-theme="light"` hoặc `data-theme="dark"` trên `<html>` hay vùng giao diện. Dùng `data-neo-style="obsidian"` cho Premium.
-
-Bạn cũng có thể gọi CLI từ thư mục gốc của dự án đích. Thay `<neonix-ui>` bằng đường dẫn tới bản Neonix UI trên máy.
+Chạy các lệnh này từ thư mục gốc của dự án Next.js:
 
 ```bash
-node "<neonix-ui>/scripts/ui.mjs" list
-node "<neonix-ui>/scripts/ui.mjs" add button --style minimal --path components/ui/minimal
-node "<neonix-ui>/scripts/ui.mjs" tokens --style minimal
+npx --yes --package=github:mankhb2k/neoUI neonix init --style premium --mode dark
+npx --yes --package=github:mankhb2k/neoUI neonix add button
+npx --yes --package=github:mankhb2k/neoUI neonix add card
 ```
 
-Lệnh cuối tạo `app/neonix-minimal.css`. Import `./neonix-minimal.css` trong `app/layout.tsx`. Nếu dự án dùng `src/app`, thêm `--path src/app` vào lệnh `tokens`. CLI dùng Premium (`obsidian`) nếu bỏ qua `--style`.
+`init` tạo `components/ui`, lưu style và chế độ vào `neonix.json`, rồi thay nội dung `app/globals.css` bằng token light/dark của theme. Nếu dự án dùng `src/app`, CLI tự chọn `src/app/globals.css`. Có thể chọn Minimal bằng `--style minimal` và light mặc định bằng `--mode light`.
 
-Khi dùng hai style cùng lúc, đặt component của mỗi style ở thư mục riêng, import cả hai file token, rồi bọc từng vùng bằng `data-neo-style="obsidian"` hoặc `data-neo-style="minimal"`.
+Lệnh `add` chép source TSX gốc và CSS Module của component đã chọn vào `components/ui`. Chạy `npx --yes --package=github:mankhb2k/neoUI neonix add --all` để chép tất cả component. CLI dùng theme trong `neonix.json`, hoặc Premium nếu chưa khởi tạo.
+
+**Lưu ý:** `init` ghi đè có chủ đích file `globals.css` đã có trong thư mục app. Hãy giữ lại các style tùy chỉnh cần thiết trước khi chạy lệnh. Vì Next.js đã import `globals.css` trong `app/layout.tsx`, không cần sửa layout.
 
 ## Thêm style vào thư viện
 
