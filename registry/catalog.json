@@ -3,7 +3,7 @@
   "styles": [
     {
       "name": "obsidian",
-      "label": "Premium",
+      "label": "Obsidian",
       "description": "Layered dark surfaces, soft corners, and a cyan accent.",
       "modes": ["light", "dark"],
       "color": "#19AEF6",

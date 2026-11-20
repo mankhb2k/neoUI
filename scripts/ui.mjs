@@ -8,7 +8,6 @@ const registryUrl = new URL("../registry/catalog.json", import.meta.url);
 const catalog = JSON.parse(await readFile(registryUrl, "utf8"));
 const [command, ...args] = process.argv.slice(2);
 const styleAliases = new Map([
-  ["premium", "obsidian"],
   ["obsidian", "obsidian"],
   ["minimal", "minimal"],
 ]);
@@ -16,8 +15,8 @@ const styleAliases = new Map([
 function showHelp() {
   console.log(`Neonix UI
 
-  npx --yes --package=github:mankhb2k/neoUI neonix init [--style premium|minimal] [--mode light|dark]
-  npx --yes --package=github:mankhb2k/neoUI neonix add <component|--all> [--style premium|minimal]
+  npx --yes --package=github:mankhb2k/neoUI neonix init [--style obsidian|minimal] [--mode light|dark]
+  npx --yes --package=github:mankhb2k/neoUI neonix add <component|--all> [--style obsidian|minimal]
   npx --yes --package=github:mankhb2k/neoUI neonix list`);
 }
 
@@ -40,9 +39,9 @@ function readOptions(values, allowedFlags) {
   return options;
 }
 
-function resolveStyle(value = "premium") {
+function resolveStyle(value = "obsidian") {
   const name = styleAliases.get(value.toLowerCase());
-  if (!name) throw new Error(`Unknown style: ${value}. Choose premium or minimal.`);
+  if (!name) throw new Error(`Unknown style: ${value}. Choose obsidian or minimal.`);
   return name;
 }
 
@@ -131,7 +130,7 @@ async function addComponent(name, options) {
   const projectConfig = await pathExists(configPath)
     ? JSON.parse(await readFile(configPath, "utf8"))
     : {};
-  const style = resolveStyle(options["--style"] ?? projectConfig.style ?? "premium");
+  const style = resolveStyle(options["--style"] ?? projectConfig.style ?? "obsidian");
   const selected = options["--all"]
     ? catalog.components
     : catalog.components.filter((component) => component.name === name);
@@ -153,7 +152,7 @@ async function run() {
   }
 
   if (command === "list") {
-    console.log("Styles: premium, minimal\nComponents:");
+    console.log("Styles: obsidian, minimal\nComponents:");
     for (const component of catalog.components) {
       console.log(`  ${component.name.padEnd(10)} ${component.description}`);
     }
