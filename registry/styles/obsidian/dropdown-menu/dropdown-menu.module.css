@@ -31,6 +31,9 @@
   animation: menu-in 0.12s ease-out;
 }
 .subContent[data-flip] { left: auto; right: calc(100% + 4px); }
+/* Invisible bridge across the gap, so hovering from the trigger to the submenu stays inside it. */
+.subContent::before { content: ""; position: absolute; top: 0; bottom: 0; right: 100%; width: 12px; }
+.subContent[data-flip]::before { right: auto; left: 100%; }
 
 .item {
   box-sizing: border-box;

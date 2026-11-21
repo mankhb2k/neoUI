@@ -264,10 +264,18 @@ export function DropdownMenuShortcut({ className, ...props }: HTMLAttributes<HTM
 export function DropdownMenuSub({ className, children, ...props }: HTMLAttributes<HTMLDivElement>) {
   const [open, setOpen] = useState(false);
   const keyboardOpen = useRef(false);
+  const timer = useRef<number | undefined>(undefined);
+  // Closing waits a moment, so the pointer can cross the gap into the submenu.
+  const cancelClose = useCallback(() => window.clearTimeout(timer.current), []);
+  const scheduleClose = useCallback(() => {
+    cancelClose();
+    timer.current = window.setTimeout(() => setOpen(false), 150);
+  }, [cancelClose]);
+  useEffect(() => cancelClose, [cancelClose]);
   const value = useMemo(() => ({ open, setOpen, keyboardOpen }), [open]);
   return (
     <SubContext.Provider value={value}>
-      <div {...props} data-menu-sub="" onMouseLeave={() => setOpen(false)} className={classes(styles.sub, className)}>
+      <div {...props} data-menu-sub="" onMouseEnter={cancelClose} onMouseLeave={scheduleClose} className={classes(styles.sub, className)}>
         {children}
       </div>
     </SubContext.Provider>

@@ -16,9 +16,12 @@ import * as StudioTabs from "../registry/styles/studio/tabs/tabs";
 import * as ObsidianDropdownMenu from "../registry/styles/obsidian/dropdown-menu/dropdown-menu";
 import * as MinimalDropdownMenu from "../registry/styles/minimal/dropdown-menu/dropdown-menu";
 import * as StudioDropdownMenu from "../registry/styles/studio/dropdown-menu/dropdown-menu";
+import * as ObsidianSelect from "../registry/styles/obsidian/select/select";
+import * as MinimalSelect from "../registry/styles/minimal/select/select";
+import * as StudioSelect from "../registry/styles/studio/select/select";
 
 export const previewComponents = {
-  obsidian: { ...ObsidianButton, ...ObsidianCard, ...ObsidianInput, ...ObsidianDialog, ...ObsidianTabs, ...ObsidianDropdownMenu },
-  minimal: { ...MinimalButton, ...MinimalCard, ...MinimalInput, ...MinimalDialog, ...MinimalTabs, ...MinimalDropdownMenu },
-  studio: { ...StudioButton, ...StudioCard, ...StudioInput, ...StudioDialog, ...StudioTabs, ...StudioDropdownMenu },
+  obsidian: { ...ObsidianButton, ...ObsidianCard, ...ObsidianInput, ...ObsidianDialog, ...ObsidianTabs, ...ObsidianDropdownMenu, ...ObsidianSelect },
+  minimal: { ...MinimalButton, ...MinimalCard, ...MinimalInput, ...MinimalDialog, ...MinimalTabs, ...MinimalDropdownMenu, ...MinimalSelect },
+  studio: { ...StudioButton, ...StudioCard, ...StudioInput, ...StudioDialog, ...StudioTabs, ...StudioDropdownMenu, ...StudioSelect },
 };

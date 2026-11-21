@@ -98,6 +98,16 @@
         "dropdown-menu/dropdown-menu.tsx",
         "dropdown-menu/dropdown-menu.module.css"
       ]
+    },
+    {
+      "name": "select",
+      "label": "Select",
+      "description": "Pick one option from a list, with groups, separators and disabled items.",
+      "category": "Forms",
+      "files": [
+        "select/select.tsx",
+        "select/select.module.css"
+      ]
     }
   ]
 }

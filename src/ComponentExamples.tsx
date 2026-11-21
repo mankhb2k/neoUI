@@ -15,6 +15,7 @@ type Kit = Pick<
   | "Tabs" | "TabsTrigger"
   | "DropdownMenu" | "DropdownMenuTrigger" | "DropdownMenuContent" | "DropdownMenuLabel" | "DropdownMenuItem"
   | "DropdownMenuSeparator" | "DropdownMenuShortcut" | "DropdownMenuSub" | "DropdownMenuSubTrigger" | "DropdownMenuSubContent"
+  | "Select" | "SelectTrigger" | "SelectValue" | "SelectContent" | "SelectItem" | "SelectLabel" | "SelectSeparator"
 >;
 
 type Example = {
@@ -790,6 +791,171 @@ import {
   },
 ];
 
+const countries = [
+  "Argentina", "Australia", "Brazil", "Canada", "China", "Denmark",
+  "Egypt", "France", "Germany", "India", "Japan", "Kenya",
+  "Mexico", "Norway", "Poland", "Vietnam",
+];
+
+const selectExamples: Example[] = [
+  {
+    id: "default",
+    title: "Default",
+    description: <>Use <code>SelectTrigger</code> with a <code>SelectValue</code> for the placeholder, then list the <code>SelectItem</code> options in <code>SelectContent</code>.</>,
+    code: `import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+<Select defaultValue="pro">
+  <SelectTrigger>
+    <SelectValue placeholder="Select a plan" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="starter">Starter</SelectItem>
+    <SelectItem value="pro">Pro</SelectItem>
+    <SelectItem value="enterprise">Enterprise</SelectItem>
+  </SelectContent>
+</Select>`,
+    render: ({ Select, SelectTrigger, SelectValue, SelectContent, SelectItem }) => (
+      <Select defaultValue="pro">
+        <SelectTrigger>
+          <SelectValue placeholder="Select a plan" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="starter">Starter</SelectItem>
+          <SelectItem value="pro">Pro</SelectItem>
+          <SelectItem value="enterprise">Enterprise</SelectItem>
+        </SelectContent>
+      </Select>
+    ),
+  },
+  {
+    id: "groups",
+    title: "Groups",
+    description: <>Use <code>SelectLabel</code> as a heading and <code>SelectSeparator</code> to divide the options into groups.</>,
+    code: `import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+<Select>
+  <SelectTrigger>
+    <SelectValue placeholder="Select a food" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectLabel>Fruits</SelectLabel>
+    <SelectItem value="apple">Apple</SelectItem>
+    <SelectItem value="banana">Banana</SelectItem>
+    <SelectSeparator />
+    <SelectLabel>Vegetables</SelectLabel>
+    <SelectItem value="carrot">Carrot</SelectItem>
+    <SelectItem value="spinach">Spinach</SelectItem>
+  </SelectContent>
+</Select>`,
+    render: ({ Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectLabel, SelectSeparator }) => (
+      <Select>
+        <SelectTrigger>
+          <SelectValue placeholder="Select a food" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectLabel>Fruits</SelectLabel>
+          <SelectItem value="apple">Apple</SelectItem>
+          <SelectItem value="banana">Banana</SelectItem>
+          <SelectSeparator />
+          <SelectLabel>Vegetables</SelectLabel>
+          <SelectItem value="carrot">Carrot</SelectItem>
+          <SelectItem value="spinach">Spinach</SelectItem>
+        </SelectContent>
+      </Select>
+    ),
+  },
+  {
+    id: "disabled",
+    title: "Disabled",
+    description: <>Add <code>disabled</code> to a <code>SelectItem</code> to block that option. Arrow keys skip it.</>,
+    code: `import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+<Select defaultValue="starter">
+  <SelectTrigger>
+    <SelectValue placeholder="Select a plan" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="starter">Starter</SelectItem>
+    <SelectItem value="pro">Pro</SelectItem>
+    <SelectItem value="enterprise" disabled>Enterprise (contact sales)</SelectItem>
+  </SelectContent>
+</Select>`,
+    render: ({ Select, SelectTrigger, SelectValue, SelectContent, SelectItem }) => (
+      <Select defaultValue="starter">
+        <SelectTrigger>
+          <SelectValue placeholder="Select a plan" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="starter">Starter</SelectItem>
+          <SelectItem value="pro">Pro</SelectItem>
+          <SelectItem value="enterprise" disabled>Enterprise (contact sales)</SelectItem>
+        </SelectContent>
+      </Select>
+    ),
+  },
+  {
+    id: "scrolling",
+    title: "Scrolling",
+    description: <>A long list scrolls inside <code>SelectContent</code>. Use the mouse wheel or the arrow keys, and the focused item scrolls into view.</>,
+    code: `import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+const countries = [
+  "Argentina", "Australia", "Brazil", "Canada", "China", "Denmark",
+  "Egypt", "France", "Germany", "India", "Japan", "Kenya",
+  "Mexico", "Norway", "Poland", "Vietnam",
+]
+
+<Select>
+  <SelectTrigger>
+    <SelectValue placeholder="Select a country" />
+  </SelectTrigger>
+  <SelectContent>
+    {countries.map((country) => (
+      <SelectItem key={country} value={country}>{country}</SelectItem>
+    ))}
+  </SelectContent>
+</Select>`,
+    render: ({ Select, SelectTrigger, SelectValue, SelectContent, SelectItem }) => (
+      <Select>
+        <SelectTrigger>
+          <SelectValue placeholder="Select a country" />
+        </SelectTrigger>
+        <SelectContent>
+          {countries.map((country) => (
+            <SelectItem key={country} value={country}>{country}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    ),
+  },
+];
+
 const exampleSets: Record<string, Example[]> = {
   button: buttonExamples,
   card: cardExamples,
@@ -797,6 +963,7 @@ const exampleSets: Record<string, Example[]> = {
   dialog: dialogExamples,
   tabs: tabsExamples,
   "dropdown-menu": dropdownMenuExamples,
+  select: selectExamples,
 };
 
 
