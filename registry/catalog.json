@@ -30,7 +30,7 @@
     {
       "name": "button",
       "label": "Button",
-      "description": "Trigger an action with three levels of emphasis.",
+      "description": "Trigger an action with six variants, four sizes, icon, spinner and group support.",
       "category": "Actions",
       "files": [
         "button/button.tsx",

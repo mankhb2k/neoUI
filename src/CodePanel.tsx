@@ -2,6 +2,7 @@
 
 import { Check, Copy } from "lucide-react";
 import { useState } from "react";
+import { CodeLines } from "./CodeLines";
 import css from "./Catalog.module.css";
 
 export type SourceFile = { name: string; source: string };
@@ -42,7 +43,9 @@ export function CodePanel({
           {copyStatus === "Copied" ? "Copied" : `Copy ${file.name}`}
         </button>
       </div>
-      <pre className={css.source} tabIndex={0} aria-label={file.name}><code>{file.source}</code></pre>
+      <pre className={css.source} tabIndex={0} aria-label={file.name}>
+        <code><CodeLines code={file.source} lang={file.name.endsWith(".css") ? "css" : "tsx"} /></code>
+      </pre>
       <span className={copyStatus === "Select the code to copy it manually." ? css.copyError : css.srOnly} role="status">
         {copyStatus}
       </span>

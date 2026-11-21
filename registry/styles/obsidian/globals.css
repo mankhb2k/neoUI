@@ -5,6 +5,7 @@
   --foreground: #18202b;
   --muted: #657185;
   --border: #d8dee8;
+  --divider: #d8dee8;
   --accent: #19aef6;
   --accent-hover: #0b8ac8;
   --accent-foreground: #ffffff;
@@ -15,11 +16,12 @@
 
 [data-neo-style="obsidian"][data-theme="dark"] {
   color-scheme: dark;
-  --background: #101318;
-  --surface: #181d25;
+  --background: #09090b;
+  --surface: #262626;
   --foreground: #f1f5f9;
   --muted: #a0acbc;
-  --border: #374253;
+  --border: #282828;
+  --divider: #3b3b3b;
   --accent: #19aef6;
   --accent-hover: #31baff;
   --accent-foreground: #ffffff;

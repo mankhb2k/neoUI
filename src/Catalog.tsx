@@ -1,8 +1,9 @@
 import { ArrowRight, Palette } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { catalogUrl, components, type CatalogStyle } from "./catalog-data";
+import { catalogUrl, components, componentsWithExamples, type CatalogStyle } from "./catalog-data";
 import { ComponentPreview } from "./ComponentPreview";
+import { ComponentExamples } from "./ComponentExamples";
 import { readSource } from "./catalog-source";
 import { CodePanel } from "./CodePanel";
 import { TokenPalette } from "./TokenPalette";
@@ -74,7 +75,9 @@ export async function Catalog({ style, page }: { style: CatalogStyle; page: stri
 
           {component && (
             <>
-              <PreviewWindow style={style} page={page} title={component.label} />
+              {componentsWithExamples.includes(page)
+                ? <ComponentExamples style={style} page={page} />
+                : <PreviewWindow style={style} page={page} title={component.label} />}
               <CodePanel key={`${style.name}/${page}`} files={sourceFiles} />
               <div className={css.note}>
                 <Palette size={17} aria-hidden="true" />
