@@ -11,6 +11,7 @@ import css from "./Catalog.module.css";
 type Kit = Pick<
   (typeof previewComponents)["obsidian"],
   "Button" | "ButtonGroup" | "Spinner" | "Card" | "CardHeader" | "CardContent" | "CardFooter" | "Input"
+  | "Dialog" | "DialogTrigger" | "DialogClose" | "DialogContent" | "DialogHeader" | "DialogBody" | "DialogFooter"
 >;
 
 type Example = {
@@ -36,6 +37,8 @@ import { ArrowUpRight } from "lucide-react"
   <ArrowUpRight />
 </Button>
 
+<Button size="medium">Medium</Button>
+
 <Button size="default">Default</Button>
 <Button size="icon" aria-label="Open">
   <ArrowUpRight />
@@ -50,6 +53,9 @@ import { ArrowUpRight } from "lucide-react"
         <div className={css.sizePair}>
           <Button size="small">Small</Button>
           <Button size="icon-small" aria-label="Open"><ArrowUpRight /></Button>
+        </div>
+        <div className={css.sizePair}>
+          <Button size="medium">Medium</Button>
         </div>
         <div className={css.sizePair}>
           <Button size="default">Default</Button>
@@ -352,10 +358,164 @@ const inputExamples: Example[] = [
   },
 ];
 
+const dialogExamples: Example[] = [
+  {
+    id: "confirm",
+    title: "Confirm",
+    description: <>Wrap the parts in <code>Dialog</code>. <code>DialogTrigger</code> opens it, and <code>DialogClose</code> closes it. The close button in <code>DialogHeader</code> is added for you.</>,
+    code: `import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+<Dialog>
+  <DialogTrigger render={<Button variant="outline">Delete project</Button>} />
+  <DialogContent>
+    <DialogHeader><h2>Delete project?</h2></DialogHeader>
+    <DialogBody>
+      <p>This action cannot be undone. All files in this project will be removed.</p>
+    </DialogBody>
+    <DialogFooter>
+      <DialogClose render={<Button size="medium" variant="outline">Cancel</Button>} />
+      <DialogClose render={<Button size="medium" variant="destructive">Delete</Button>} />
+    </DialogFooter>
+  </DialogContent>
+</Dialog>`,
+    render: ({ Dialog, DialogTrigger, DialogClose, DialogContent, DialogHeader, DialogBody, DialogFooter, Button }) => (
+      <Dialog>
+        <DialogTrigger render={<Button variant="outline">Delete project</Button>} />
+        <DialogContent>
+          <DialogHeader><h2>Delete project?</h2></DialogHeader>
+          <DialogBody>
+            <p>This action cannot be undone. All files in this project will be removed.</p>
+          </DialogBody>
+          <DialogFooter>
+            <DialogClose render={<Button size="medium" variant="outline">Cancel</Button>} />
+            <DialogClose render={<Button size="medium" variant="destructive">Delete</Button>} />
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    ),
+  },
+  {
+    id: "form",
+    title: "Form",
+    description: <>Put an <code>Input</code> in <code>DialogBody</code> to collect data before saving.</>,
+    code: `import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import {
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+<Dialog>
+  <DialogTrigger render={<Button>Edit profile</Button>} />
+  <DialogContent>
+    <DialogHeader><h2>Edit profile</h2></DialogHeader>
+    <DialogBody>
+      <label>
+        Display name
+        <Input defaultValue="Neonix" />
+      </label>
+    </DialogBody>
+    <DialogFooter>
+      <DialogClose render={<Button size="medium" variant="outline">Cancel</Button>} />
+      <DialogClose render={<Button size="medium">Save</Button>} />
+    </DialogFooter>
+  </DialogContent>
+</Dialog>`,
+    render: ({ Dialog, DialogTrigger, DialogClose, DialogContent, DialogHeader, DialogBody, DialogFooter, Button, Input }) => (
+      <Dialog>
+        <DialogTrigger render={<Button>Edit profile</Button>} />
+        <DialogContent>
+          <DialogHeader><h2>Edit profile</h2></DialogHeader>
+          <DialogBody>
+            <label className={css.exampleInput}>
+              Display name
+              <Input defaultValue="Neonix" />
+            </label>
+          </DialogBody>
+          <DialogFooter>
+            <DialogClose render={<Button size="medium" variant="outline">Cancel</Button>} />
+            <DialogClose render={<Button size="medium">Save</Button>} />
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    ),
+  },
+  {
+    id: "close-button",
+    title: "Close Button",
+    description: <>Set <code>showCloseButton</code> on <code>DialogHeader</code> to show or hide the X button. It is shown by default.</>,
+    code: `import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+<Dialog>
+  <DialogTrigger render={<Button variant="outline">With close button</Button>} />
+  <DialogContent>
+    <DialogHeader showCloseButton={true}><h2>Notifications</h2></DialogHeader>
+    <DialogBody><p>You have 3 unread messages.</p></DialogBody>
+  </DialogContent>
+</Dialog>
+
+<Dialog>
+  <DialogTrigger render={<Button variant="outline">Without close button</Button>} />
+  <DialogContent>
+    <DialogHeader showCloseButton={false}><h2>Notifications</h2></DialogHeader>
+    <DialogBody><p>You have 3 unread messages.</p></DialogBody>
+    <DialogFooter>
+      <DialogClose render={<Button size="medium">Got it</Button>} />
+    </DialogFooter>
+  </DialogContent>
+</Dialog>`,
+    render: ({ Dialog, DialogTrigger, DialogClose, DialogContent, DialogHeader, DialogBody, DialogFooter, Button }) => (
+      <>
+        <Dialog>
+          <DialogTrigger render={<Button variant="outline">With close button</Button>} />
+          <DialogContent>
+            <DialogHeader showCloseButton={true}><h2>Notifications</h2></DialogHeader>
+            <DialogBody><p>You have 3 unread messages.</p></DialogBody>
+          </DialogContent>
+        </Dialog>
+        <Dialog>
+          <DialogTrigger render={<Button variant="outline">Without close button</Button>} />
+          <DialogContent>
+            <DialogHeader showCloseButton={false}><h2>Notifications</h2></DialogHeader>
+            <DialogBody><p>You have 3 unread messages.</p></DialogBody>
+            <DialogFooter>
+              <DialogClose render={<Button size="medium">Got it</Button>} />
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </>
+    ),
+  },
+];
+
 const exampleSets: Record<string, Example[]> = {
   button: buttonExamples,
   card: cardExamples,
   input: inputExamples,
+  dialog: dialogExamples,
 };
 
 

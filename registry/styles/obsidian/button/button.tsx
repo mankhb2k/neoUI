@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, HTMLAttributes, SVGAttributes } from "react"
 import styles from "./button.module.css";
 
 export type ButtonVariant = "default" | "primary" | "secondary" | "soft" | "outline" | "ghost" | "destructive" | "link";
-export type ButtonSize = "small" | "default" | "large" | "icon" | "icon-small" | "icon-large";
+export type ButtonSize = "small" | "medium" | "default" | "large" | "icon" | "icon-small" | "icon-large";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** `primary` is kept as an alias of `default`. */
@@ -23,6 +23,7 @@ const variantClass: Record<ButtonVariant, string> = {
 
 const sizeClass: Record<ButtonSize, string> = {
   small: styles.sizeSmall,
+  medium: styles.sizeMedium,
   default: styles.sizeDefault,
   large: styles.sizeLarge,
   icon: styles.sizeIcon,

@@ -56,6 +56,16 @@
         "input/input.tsx",
         "input/input.module.css"
       ]
+    },
+    {
+      "name": "dialog",
+      "label": "Dialog",
+      "description": "A modal with a fixed header that has a close button, a content area and a fixed footer.",
+      "category": "Overlays",
+      "files": [
+        "dialog/dialog.tsx",
+        "dialog/dialog.module.css"
+      ]
     }
   ]
 }

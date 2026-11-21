@@ -18,12 +18,14 @@
 
 /* Sizes */
 .sizeSmall { min-height: 28px; padding: 0 12px; font-size: 12px; }
+.sizeMedium { min-height: 32px; padding: 0 14px; font-size: 13px; }
 .sizeDefault { min-height: 36px; padding: 0 16px; font-size: 13px; }
 .sizeLarge { min-height: 44px; padding: 0 20px; font-size: 14px; }
 .sizeIcon { width: 40px; min-height: 40px; padding: 0; }
 .sizeIconSmall { width: 32px; min-height: 32px; padding: 0; }
 .sizeIconLarge { width: 48px; min-height: 48px; padding: 0; }
 .sizeSmall svg { width: 13px; height: 13px; }
+.sizeMedium svg { width: 14px; height: 14px; }
 .sizeIconSmall svg { width: 14px; height: 14px; }
 .sizeDefault svg, .sizeIcon svg { width: 16px; height: 16px; }
 .sizeLarge svg, .sizeIconLarge svg { width: 18px; height: 18px; }
