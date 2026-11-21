@@ -24,6 +24,18 @@
         "#FFFFFF",
         "#1C1C1C"
       ]
+    },
+    {
+      "name": "studio",
+      "label": "Studio",
+      "description": "Layered neutral grays with a sky-blue accent, built for editors and code tools.",
+      "modes": ["light", "dark"],
+      "color": "#38A3EE",
+      "colors": [
+        "#171717",
+        "#262626",
+        "#38A3EE"
+      ]
     }
   ],
   "components": [
@@ -65,6 +77,26 @@
       "files": [
         "dialog/dialog.tsx",
         "dialog/dialog.module.css"
+      ]
+    },
+    {
+      "name": "tabs",
+      "label": "Tabs",
+      "description": "A segmented control that switches between a few options, such as monthly and annual billing.",
+      "category": "Actions",
+      "files": [
+        "tabs/tabs.tsx",
+        "tabs/tabs.module.css"
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "label": "Dropdown Menu",
+      "description": "A menu of actions opened from a button, with labels, shortcuts, icons, submenus and destructive items.",
+      "category": "Overlays",
+      "files": [
+        "dropdown-menu/dropdown-menu.tsx",
+        "dropdown-menu/dropdown-menu.module.css"
       ]
     }
   ]

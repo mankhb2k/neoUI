@@ -1,0 +1,58 @@
+.group {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+/* Sliding indicator behind the selected item. Tabs.tsx sets --tabs-x and --tabs-w. */
+.group::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: var(--tabs-x, 4px);
+  width: var(--tabs-w, 0px);
+  border: 1px solid var(--divider);
+  border-radius: 999px;
+  background: var(--inset, var(--background));
+  transition: left 0.3s cubic-bezier(0.22, 1, 0.36, 1), width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.item {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+.item[aria-checked="true"] { color: var(--foreground); }
+.item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.item:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* variant="line": no pill, the indicator becomes an underline */
+.line { padding: 0; border-color: transparent; border-radius: 0; background: transparent; }
+.line::before { top: auto; bottom: 0; height: 2px; border: 0; border-radius: 0; background: var(--foreground); }
+.line > .item { padding: 0 16px; border: 0; border-radius: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .group::before, .item { transition: none; }
+}

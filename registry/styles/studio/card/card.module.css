@@ -1,0 +1,32 @@
+.card {
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  color: var(--foreground);
+}
+.header {
+  display: grid;
+  gap: 6px;
+  padding: 20px;
+  border-bottom: 1px solid var(--divider);
+}
+.header:first-child {
+  border-start-start-radius: calc(var(--radius-card) - 1px);
+  border-start-end-radius: calc(var(--radius-card) - 1px);
+}
+.header > h3 { margin: 0; font-size: 17px; font-weight: 600; }
+.header > p { margin: 0; color: var(--muted); line-height: 1.55; }
+.content { padding: 20px; }
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--divider);
+}
+.footer:last-child {
+  border-end-start-radius: calc(var(--radius-card) - 1px);
+  border-end-end-radius: calc(var(--radius-card) - 1px);
+}

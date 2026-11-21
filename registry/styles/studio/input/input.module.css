@@ -1,0 +1,15 @@
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  padding: 0 12px;
+  background: var(--inset);
+  color: var(--foreground);
+  font: inherit;
+  font-size: 13px;
+}
+.input::placeholder { color: var(--muted); }
+.input:focus, .input:focus-visible { outline: none; border-color: var(--border); }
+.input:disabled { opacity: .5; cursor: not-allowed; }

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ArrowUpRight, Code, Plus } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Code, Copy, CreditCard, LogOut, Pencil, Plus, Settings, Trash2, User } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { previewComponents } from "./catalog-previews";
 import type { CatalogStyle } from "./catalog-data";
@@ -12,6 +12,9 @@ type Kit = Pick<
   (typeof previewComponents)["obsidian"],
   "Button" | "ButtonGroup" | "Spinner" | "Card" | "CardHeader" | "CardContent" | "CardFooter" | "Input"
   | "Dialog" | "DialogTrigger" | "DialogClose" | "DialogContent" | "DialogHeader" | "DialogBody" | "DialogFooter"
+  | "Tabs" | "TabsTrigger"
+  | "DropdownMenu" | "DropdownMenuTrigger" | "DropdownMenuContent" | "DropdownMenuLabel" | "DropdownMenuItem"
+  | "DropdownMenuSeparator" | "DropdownMenuShortcut" | "DropdownMenuSub" | "DropdownMenuSubTrigger" | "DropdownMenuSubContent"
 >;
 
 type Example = {
@@ -103,7 +106,7 @@ import { ArrowUpRight } from "lucide-react"
 
 <Button variant="soft">Popular</Button>`,
     render: ({ Button }) => <Button variant="soft">Popular</Button>,
-    styles: ["obsidian"],
+    styles: ["obsidian", "studio"],
   },
   {
     id: "ghost",
@@ -511,11 +514,289 @@ import {
   },
 ];
 
+const tabsExamples: Example[] = [
+  {
+    id: "default",
+    title: "Default",
+    description: <>Use <code>Tabs</code> with <code>TabsTrigger</code> items. Set <code>defaultValue</code> for an uncontrolled group, or pass <code>value</code> and <code>onValueChange</code> to control it.</>,
+    code: `import { Tabs, TabsTrigger } from "@/components/ui/tabs"
+
+<Tabs defaultValue="annually">
+  <TabsTrigger value="monthly">Monthly</TabsTrigger>
+  <TabsTrigger value="annually">Annually</TabsTrigger>
+</Tabs>`,
+    render: ({ Tabs, TabsTrigger }) => (
+      <Tabs defaultValue="annually">
+        <TabsTrigger value="monthly">Monthly</TabsTrigger>
+        <TabsTrigger value="annually">Annually</TabsTrigger>
+      </Tabs>
+    ),
+  },
+  {
+    id: "disabled",
+    title: "Disabled",
+    description: <>Add <code>disabled</code> to a <code>TabsTrigger</code> to block that option. Arrow keys skip it.</>,
+    code: `import { Tabs, TabsTrigger } from "@/components/ui/tabs"
+
+<Tabs defaultValue="monthly">
+  <TabsTrigger value="monthly">Monthly</TabsTrigger>
+  <TabsTrigger value="annually">Annually</TabsTrigger>
+  <TabsTrigger value="enterprise" disabled>Enterprise</TabsTrigger>
+</Tabs>`,
+    render: ({ Tabs, TabsTrigger }) => (
+      <Tabs defaultValue="monthly">
+        <TabsTrigger value="monthly">Monthly</TabsTrigger>
+        <TabsTrigger value="annually">Annually</TabsTrigger>
+        <TabsTrigger value="enterprise" disabled>Enterprise</TabsTrigger>
+      </Tabs>
+    ),
+  },
+  {
+    id: "line",
+    title: "Line",
+    description: <>Use the <code>variant=&quot;line&quot;</code> prop on <code>Tabs</code> for a line style.</>,
+    code: `import { Tabs, TabsTrigger } from "@/components/ui/tabs"
+
+<Tabs defaultValue="overview" variant="line">
+  <TabsTrigger value="overview">Overview</TabsTrigger>
+  <TabsTrigger value="analytics">Analytics</TabsTrigger>
+  <TabsTrigger value="reports">Reports</TabsTrigger>
+</Tabs>`,
+    render: ({ Tabs, TabsTrigger }) => (
+      <Tabs defaultValue="overview" variant="line">
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="analytics">Analytics</TabsTrigger>
+        <TabsTrigger value="reports">Reports</TabsTrigger>
+      </Tabs>
+    ),
+  },
+];
+
+const dropdownMenuExamples: Example[] = [
+  {
+    id: "basic",
+    title: "Basic",
+    description: <>Open a menu from any button with <code>DropdownMenuTrigger</code>. Use <code>DropdownMenuLabel</code> and <code>DropdownMenuSeparator</code> to group items.</>,
+    code: `import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+<DropdownMenu>
+  <DropdownMenuTrigger render={<Button variant="outline">Open</Button>} />
+  <DropdownMenuContent>
+    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+    <DropdownMenuItem>Profile</DropdownMenuItem>
+    <DropdownMenuItem>Billing</DropdownMenuItem>
+    <DropdownMenuItem>Settings</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Log out</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`,
+    render: ({ Button, DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger render={<Button variant="outline">Open</Button>} />
+        <DropdownMenuContent>
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuItem>Profile</DropdownMenuItem>
+          <DropdownMenuItem>Billing</DropdownMenuItem>
+          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Log out</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+  },
+  {
+    id: "submenu",
+    title: "Submenu",
+    description: <>Wrap a <code>DropdownMenuSubTrigger</code> and a <code>DropdownMenuSubContent</code> in <code>DropdownMenuSub</code>. It opens on hover or with the right arrow key.</>,
+    code: `import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+<DropdownMenu>
+  <DropdownMenuTrigger render={<Button variant="outline">Open</Button>} />
+  <DropdownMenuContent>
+    <DropdownMenuItem>New Tab</DropdownMenuItem>
+    <DropdownMenuItem>New Window</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuSub>
+      <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>
+      <DropdownMenuSubContent>
+        <DropdownMenuItem>Email link</DropdownMenuItem>
+        <DropdownMenuItem>Messages</DropdownMenuItem>
+        <DropdownMenuItem>Notes</DropdownMenuItem>
+      </DropdownMenuSubContent>
+    </DropdownMenuSub>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Print</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`,
+    render: ({ Button, DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger render={<Button variant="outline">Open</Button>} />
+        <DropdownMenuContent>
+          <DropdownMenuItem>New Tab</DropdownMenuItem>
+          <DropdownMenuItem>New Window</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>
+            <DropdownMenuSubContent>
+              <DropdownMenuItem>Email link</DropdownMenuItem>
+              <DropdownMenuItem>Messages</DropdownMenuItem>
+              <DropdownMenuItem>Notes</DropdownMenuItem>
+            </DropdownMenuSubContent>
+          </DropdownMenuSub>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Print</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+  },
+  {
+    id: "shortcuts",
+    title: "Shortcuts",
+    description: <>Add <code>DropdownMenuShortcut</code> inside an item to show its keyboard shortcut on the right.</>,
+    code: `import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+<DropdownMenu>
+  <DropdownMenuTrigger render={<Button variant="outline">Open</Button>} />
+  <DropdownMenuContent>
+    <DropdownMenuItem>
+      New File
+      <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      Open
+      <DropdownMenuShortcut>⌘O</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      Save
+      <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+      Quit
+      <DropdownMenuShortcut>⌘Q</DropdownMenuShortcut>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`,
+    render: ({ Button, DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuShortcut }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger render={<Button variant="outline">Open</Button>} />
+        <DropdownMenuContent>
+          <DropdownMenuItem>New File<DropdownMenuShortcut>⌘N</DropdownMenuShortcut></DropdownMenuItem>
+          <DropdownMenuItem>Open<DropdownMenuShortcut>⌘O</DropdownMenuShortcut></DropdownMenuItem>
+          <DropdownMenuItem>Save<DropdownMenuShortcut>⌘S</DropdownMenuShortcut></DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Quit<DropdownMenuShortcut>⌘Q</DropdownMenuShortcut></DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+  },
+  {
+    id: "icons",
+    title: "Icons",
+    description: <>Put an icon before the label. Icons are sized and colored for you.</>,
+    code: `import { CreditCard, LogOut, Settings, User } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+<DropdownMenu>
+  <DropdownMenuTrigger render={<Button variant="outline">Open</Button>} />
+  <DropdownMenuContent>
+    <DropdownMenuItem><User /> Profile</DropdownMenuItem>
+    <DropdownMenuItem><CreditCard /> Billing</DropdownMenuItem>
+    <DropdownMenuItem><Settings /> Settings</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem><LogOut /> Log out</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`,
+    render: ({ Button, DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger render={<Button variant="outline">Open</Button>} />
+        <DropdownMenuContent>
+          <DropdownMenuItem><User /> Profile</DropdownMenuItem>
+          <DropdownMenuItem><CreditCard /> Billing</DropdownMenuItem>
+          <DropdownMenuItem><Settings /> Settings</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem><LogOut /> Log out</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+  },
+  {
+    id: "destructive",
+    title: "Destructive",
+    description: <>Use <code>variant=&quot;destructive&quot;</code> on an item for actions that delete or permanently change data.</>,
+    code: `import { Copy, Pencil, Trash2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+<DropdownMenu>
+  <DropdownMenuTrigger render={<Button variant="outline">Open</Button>} />
+  <DropdownMenuContent>
+    <DropdownMenuItem><Pencil /> Edit</DropdownMenuItem>
+    <DropdownMenuItem><Copy /> Duplicate</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem variant="destructive"><Trash2 /> Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`,
+    render: ({ Button, DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger render={<Button variant="outline">Open</Button>} />
+        <DropdownMenuContent>
+          <DropdownMenuItem><Pencil /> Edit</DropdownMenuItem>
+          <DropdownMenuItem><Copy /> Duplicate</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem variant="destructive"><Trash2 /> Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+  },
+];
+
 const exampleSets: Record<string, Example[]> = {
   button: buttonExamples,
   card: cardExamples,
   input: inputExamples,
   dialog: dialogExamples,
+  tabs: tabsExamples,
+  "dropdown-menu": dropdownMenuExamples,
 };
 
 

@@ -8,6 +8,7 @@ import css from "./SiteHeader.module.css";
 import "./globals.css";
 import "../registry/styles/obsidian/globals.css";
 import "../registry/styles/minimal/globals.css";
+import "../registry/styles/studio/globals.css";
 
 export const metadata: Metadata = {
   title: "Neonix UI — UI libraries for Next.js",
