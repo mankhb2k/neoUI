@@ -1,6 +1,5 @@
 .card {
   box-sizing: border-box;
-  padding: 22px;
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
   background: var(--background);
@@ -10,9 +9,27 @@
 .header {
   display: grid;
   gap: 6px;
-  padding-bottom: 16px;
+  padding: 20px;
+  background: var(--surface);
   border-bottom: 1px solid var(--divider);
 }
-.title { margin: 0; font-size: 17px; font-weight: 700; }
-.description { margin: 0; color: var(--muted); line-height: 1.55; }
-.content { margin-top: 16px; }
+.header:first-child {
+  border-start-start-radius: calc(var(--radius-card) - 1px);
+  border-start-end-radius: calc(var(--radius-card) - 1px);
+}
+.header > h3 { margin: 0; font-size: 17px; font-weight: 700; }
+.header > p { margin: 0; color: var(--muted); line-height: 1.55; }
+.content { padding: 20px; }
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border-top: 1px solid var(--divider);
+}
+.footer:last-child {
+  border-end-start-radius: calc(var(--radius-card) - 1px);
+  border-end-end-radius: calc(var(--radius-card) - 1px);
+}

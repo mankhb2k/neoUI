@@ -8,7 +8,10 @@ import { useThemeStore } from "./theme-store";
 import { CodeLines } from "./CodeLines";
 import css from "./Catalog.module.css";
 
-type Kit = Pick<(typeof previewComponents)["obsidian"], "Button" | "ButtonGroup" | "Spinner">;
+type Kit = Pick<
+  (typeof previewComponents)["obsidian"],
+  "Button" | "ButtonGroup" | "Spinner" | "Card" | "CardHeader" | "CardContent" | "CardFooter" | "Input"
+>;
 
 type Example = {
   id: string;
@@ -16,6 +19,8 @@ type Example = {
   description: ReactNode;
   code: string;
   render: (kit: Kit) => ReactNode;
+  /** Limit the example to these style names. Omit to show it for every style. */
+  styles?: string[];
 };
 
 const buttonExamples: Example[] = [
@@ -83,6 +88,16 @@ import { ArrowUpRight } from "lucide-react"
 
 <Button variant="secondary">Secondary</Button>`,
     render: ({ Button }) => <Button variant="secondary">Secondary</Button>,
+  },
+  {
+    id: "soft",
+    title: "Soft",
+    description: "A tinted accent button for highlighted but low-emphasis labels or actions.",
+    code: `import { Button } from "@/components/ui/button"
+
+<Button variant="soft">Popular</Button>`,
+    render: ({ Button }) => <Button variant="soft">Popular</Button>,
+    styles: ["obsidian"],
   },
   {
     id: "ghost",
@@ -191,15 +206,163 @@ import { ArrowRight } from "lucide-react"
   },
 ];
 
+const cardExamples: Example[] = [
+  {
+    id: "content",
+    title: "Content",
+    description: <>A card only needs <code>CardContent</code>. Add a header or footer when you need them.</>,
+    code: `import { Card, CardContent } from "@/components/ui/card"
+
+<Card>
+  <CardContent>
+    <p>Your storage is 80% full.</p>
+  </CardContent>
+</Card>`,
+    render: ({ Card, CardContent }) => (
+      <div className={css.exampleCard}>
+        <Card>
+          <CardContent><p>Your storage is 80% full.</p></CardContent>
+        </Card>
+      </div>
+    ),
+  },
+  {
+    id: "header-content",
+    title: "Header and Content",
+    description: <>Use a <code>&lt;h3&gt;</code> and a <code>&lt;p&gt;</code> inside <code>CardHeader</code> for the title and description.</>,
+    code: `import { Card, CardContent, CardHeader } from "@/components/ui/card"
+
+<Card>
+  <CardHeader>
+    <h3>Project overview</h3>
+  </CardHeader>
+  <CardContent>
+    <small>Updated today</small>
+  </CardContent>
+</Card>`,
+    render: ({ Card, CardHeader, CardContent }) => (
+      <div className={css.exampleCard}>
+        <Card>
+          <CardHeader>
+            <h3>Project overview</h3>
+          </CardHeader>
+          <CardContent><small>Updated today</small></CardContent>
+        </Card>
+      </div>
+    ),
+  },
+  {
+    id: "content-footer",
+    title: "Content and Footer",
+    description: <>Use <code>CardFooter</code> for actions. It lays out its children in a row.</>,
+    code: `import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
+
+<Card>
+  <CardContent>
+    <p>Your storage is 80% full.</p>
+  </CardContent>
+  <CardFooter>
+    <Button variant="outline">Dismiss</Button>
+    <Button>Upgrade</Button>
+  </CardFooter>
+</Card>`,
+    render: ({ Button, Card, CardContent, CardFooter }) => (
+      <div className={css.exampleCard}>
+        <Card>
+          <CardContent><p>Your storage is 80% full.</p></CardContent>
+          <CardFooter>
+            <Button variant="outline">Dismiss</Button>
+            <Button>Upgrade</Button>
+          </CardFooter>
+        </Card>
+      </div>
+    ),
+  },
+  {
+    id: "header-content-footer",
+    title: "Header, Content and Footer",
+    description: <>Combine all three sections for a complete card.</>,
+    code: `import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+
+<Card>
+  <CardHeader>
+    <h3>Project overview</h3>
+  </CardHeader>
+  <CardContent>
+    <small>Updated today</small>
+  </CardContent>
+  <CardFooter>
+    <Button variant="outline">Cancel</Button>
+    <Button>Save</Button>
+  </CardFooter>
+</Card>`,
+    render: ({ Button, Card, CardHeader, CardContent, CardFooter }) => (
+      <div className={css.exampleCard}>
+        <Card>
+          <CardHeader>
+            <h3>Project overview</h3>
+          </CardHeader>
+          <CardContent><small>Updated today</small></CardContent>
+          <CardFooter>
+            <Button variant="outline">Cancel</Button>
+            <Button>Save</Button>
+          </CardFooter>
+        </Card>
+      </div>
+    ),
+  },
+];
+
+const inputExamples: Example[] = [
+  {
+    id: "default",
+    title: "Default",
+    description: <>Use <code>Input</code> inside a label to collect short text.</>,
+    code: `import { Input } from "@/components/ui/input"
+
+<label>
+  Email address
+  <Input type="email" placeholder="you@example.com" />
+</label>`,
+    render: ({ Input }) => (
+      <label className={css.exampleInput}>
+        Email address
+        <Input type="email" placeholder="you@example.com" />
+      </label>
+    ),
+  },
+  {
+    id: "disabled",
+    title: "Disabled",
+    description: <>Add the <code>disabled</code> attribute to block editing.</>,
+    code: `import { Input } from "@/components/ui/input"
+
+<label>
+  Workspace ID
+  <Input defaultValue="neonix-7f3a" disabled />
+</label>`,
+    render: ({ Input }) => (
+      <label className={css.exampleInput}>
+        Workspace ID
+        <Input defaultValue="neonix-7f3a" disabled />
+      </label>
+    ),
+  },
+];
+
 const exampleSets: Record<string, Example[]> = {
   button: buttonExamples,
+  card: cardExamples,
+  input: inputExamples,
 };
 
 
 export function ComponentExamples({ style, page }: { style: CatalogStyle; page: string }) {
   const mode = useThemeStore((state) => state.mode);
-  const kit = previewComponents[style.name as keyof typeof previewComponents];
-  const examples = exampleSets[page] ?? [];
+  const kit = previewComponents[style.name as keyof typeof previewComponents] as Kit;
+  const examples = (exampleSets[page] ?? []).filter((example) => !example.styles || example.styles.includes(style.name));
 
   return (
     <div className={css.docs} data-neo-style={style.name} data-theme={mode}>

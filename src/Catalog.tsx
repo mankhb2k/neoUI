@@ -1,26 +1,13 @@
 import { ArrowRight, Palette } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { catalogUrl, components, componentsWithExamples, type CatalogStyle } from "./catalog-data";
-import { ComponentPreview } from "./ComponentPreview";
+import { catalogUrl, components, type CatalogStyle } from "./catalog-data";
 import { ComponentExamples } from "./ComponentExamples";
 import { readSource } from "./catalog-source";
 import { CodePanel } from "./CodePanel";
 import { TokenPalette } from "./TokenPalette";
 import { StyleSelect } from "./StyleSelect";
 import css from "./Catalog.module.css";
-
-function PreviewWindow({ style, page, title }: { style: CatalogStyle; page: string; title: string }) {
-  return (
-    <section className={css.previewWindow} aria-label={`${title} preview`}>
-      <div className={css.windowBar}>
-        <span className={css.windowControls} aria-hidden="true"><i /><i /><i /></span>
-        <span className={css.windowTitle}>Preview</span>
-      </div>
-      <ComponentPreview style={style} page={page} />
-    </section>
-  );
-}
 
 function NavLink({ href, active, icon, children }: {
   href: string;
@@ -75,9 +62,7 @@ export async function Catalog({ style, page }: { style: CatalogStyle; page: stri
 
           {component && (
             <>
-              {componentsWithExamples.includes(page)
-                ? <ComponentExamples style={style} page={page} />
-                : <PreviewWindow style={style} page={page} title={component.label} />}
+              <ComponentExamples style={style} page={page} />
               <CodePanel key={`${style.name}/${page}`} files={sourceFiles} />
               <div className={css.note}>
                 <Palette size={17} aria-hidden="true" />

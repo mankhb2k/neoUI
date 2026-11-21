@@ -54,14 +54,14 @@
 .intro p { margin: 12px 0 0; color: var(--muted); line-height: 1.65; font-size: 15px; }
 .sectionTitle { margin: 30px 0 13px; font-size: 15px; font-weight: 700; }
 .componentList a > svg { color: var(--muted); }
-.previewWindow, .panel { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); }
+.panel { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); }
 .panel { margin-top: 16px; }
-.windowBar, .sourceHeader { min-height: 42px; padding: 0 15px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--divider); background: var(--surface); }
+.sourceHeader { min-height: 42px; padding: 0 15px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--divider); background: var(--surface); }
 .windowControls { display: inline-flex; align-items: center; gap: 7px; }
 .windowControls i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
 .windowControls i:nth-child(2) { background: #febc2e; }
 .windowControls i:nth-child(3) { background: #28c840; }
-.windowTitle, .sourceHeader > span { color: var(--muted); font-size: 12px; }
+.sourceHeader > span { color: var(--muted); font-size: 12px; }
 .sourceHeader { min-height: 43px; }
 .panelTabs { display: flex; gap: 19px; padding: 0 17px; border-bottom: 1px solid var(--line); }
 .panelTabs button, .fileTabs button {

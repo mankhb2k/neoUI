@@ -8,7 +8,7 @@ import css from "../app/Home.module.css";
 
 export function LibraryPreview({ style }: { style: CatalogStyle }) {
   const mode = useThemeStore((state) => state.mode);
-  const { Button, Card, CardHeader, CardTitle, CardDescription, CardContent } =
+  const { Button, Card, CardHeader, CardFooter } =
     previewComponents[style.name as keyof typeof previewComponents];
 
   return (
@@ -16,13 +16,13 @@ export function LibraryPreview({ style }: { style: CatalogStyle }) {
       <Card className={css.example}>
         <CardHeader>
           <span className={css.exampleIcon}><Layers2 size={17} aria-hidden="true" /></span>
-          <CardTitle>Project settings</CardTitle>
-          <CardDescription>Manage your workspace preferences.</CardDescription>
+          <h3>Project settings</h3>
+          <p>Manage your workspace preferences.</p>
         </CardHeader>
-        <CardContent className={css.exampleActions}>
+        <CardFooter>
           <Button>Save changes</Button>
           <Button variant="outline">Cancel</Button>
-        </CardContent>
+        </CardFooter>
       </Card>
     </div>
   );

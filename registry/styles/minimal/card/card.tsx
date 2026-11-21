@@ -9,14 +9,10 @@ export function CardHeader({ className, ...props }: HTMLAttributes<HTMLDivElemen
   return <div {...props} className={[styles.header, className].filter(Boolean).join(" ")} />;
 }
 
-export function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 {...props} className={[styles.title, className].filter(Boolean).join(" ")} />;
-}
-
-export function CardDescription({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {
-  return <p {...props} className={[styles.description, className].filter(Boolean).join(" ")} />;
-}
-
 export function CardContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return <div {...props} className={[styles.content, className].filter(Boolean).join(" ")} />;
+}
+
+export function CardFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div {...props} className={[styles.footer, className].filter(Boolean).join(" ")} />;
 }

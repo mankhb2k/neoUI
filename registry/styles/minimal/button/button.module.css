@@ -19,9 +19,9 @@
 .sizeSmall { min-height: 32px; padding: 0 10px; font-size: 13px; }
 .sizeDefault { min-height: 40px; padding: 0 14px; font-size: 14px; }
 .sizeLarge { min-height: 48px; padding: 0 20px; font-size: 16px; }
-.sizeIcon { width: 40px; padding: 0; }
-.sizeIconSmall { width: 32px; padding: 0; }
-.sizeIconLarge { width: 48px; padding: 0; }
+.sizeIcon { width: 40px; min-height: 40px; padding: 0; }
+.sizeIconSmall { width: 32px; min-height: 32px; padding: 0; }
+.sizeIconLarge { width: 48px; min-height: 48px; padding: 0; }
 .sizeSmall svg, .sizeIconSmall svg { width: 14px; height: 14px; }
 .sizeDefault svg, .sizeIcon svg { width: 16px; height: 16px; }
 .sizeLarge svg, .sizeIconLarge svg { width: 18px; height: 18px; }

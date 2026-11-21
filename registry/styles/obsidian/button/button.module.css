@@ -9,20 +9,22 @@
   border-radius: var(--radius-control);
   font: inherit;
   font-size: 14px;
-  font-weight: 650;
+  font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
 }
 .button svg { flex-shrink: 0; }
+.button svg:not(.spinner) { stroke-width: 2; }
 
 /* Sizes */
-.sizeSmall { min-height: 32px; padding: 0 12px; font-size: 13px; }
-.sizeDefault { min-height: 40px; padding: 0 16px; font-size: 14px; }
-.sizeLarge { min-height: 48px; padding: 0 22px; font-size: 16px; }
-.sizeIcon { width: 40px; padding: 0; }
-.sizeIconSmall { width: 32px; padding: 0; }
-.sizeIconLarge { width: 48px; padding: 0; }
-.sizeSmall svg, .sizeIconSmall svg { width: 14px; height: 14px; }
+.sizeSmall { min-height: 28px; padding: 0 12px; font-size: 12px; }
+.sizeDefault { min-height: 36px; padding: 0 16px; font-size: 13px; }
+.sizeLarge { min-height: 44px; padding: 0 20px; font-size: 14px; }
+.sizeIcon { width: 40px; min-height: 40px; padding: 0; }
+.sizeIconSmall { width: 32px; min-height: 32px; padding: 0; }
+.sizeIconLarge { width: 48px; min-height: 48px; padding: 0; }
+.sizeSmall svg { width: 13px; height: 13px; }
+.sizeIconSmall svg { width: 14px; height: 14px; }
 .sizeDefault svg, .sizeIcon svg { width: 16px; height: 16px; }
 .sizeLarge svg, .sizeIconLarge svg { width: 18px; height: 18px; }
 
@@ -31,14 +33,26 @@
 .button:has(> [data-icon="inline-end"]) { padding-inline-end: 12px; }
 
 /* Variants */
-.default, .primary { background: var(--accent); color: var(--accent-foreground); }
+.default, .primary { background: var(--accent); color: #fafafa; }
 .default:hover:not(:disabled), .primary:hover:not(:disabled) { background: var(--accent-hover); }
-.secondary { background: var(--secondary); color: var(--foreground); border-color: var(--border); }
-.secondary:hover:not(:disabled) { border-color: var(--accent); }
+.soft {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.soft:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.secondary { background: #262626; color: #fafafa; }
+.secondary:hover:not(:disabled) { background: #303030; }
 .outline { background: transparent; color: var(--foreground); border-color: var(--border); }
-.outline:hover:not(:disabled) { border-color: var(--accent); }
-.ghost { background: transparent; color: var(--foreground); }
-.ghost:hover:not(:disabled) { background: var(--secondary); }
+.outline:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  border-color: color-mix(in srgb, var(--foreground) 15%, transparent);
+}
+.ghost { background: transparent; color: #fafafa; }
+.ghost:hover:not(:disabled) { background: #262626; }
 .destructive {
   background: var(--destructive, #e5484d);
   color: #ffffff;
@@ -63,6 +77,8 @@
 .group > .button:first-child { border-start-start-radius: var(--radius-control); border-end-start-radius: var(--radius-control); }
 .group > .button:last-child { border-start-end-radius: var(--radius-control); border-end-end-radius: var(--radius-control); }
 .group > .button + .button { margin-inline-start: -1px; }
+.group > .button:focus-visible { position: relative; z-index: 1; }
+.group > .outline:hover:not(:disabled), .group > .secondary:hover:not(:disabled) { border-color: var(--border); }
 
 .button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .button:disabled { opacity: .45; cursor: not-allowed; }

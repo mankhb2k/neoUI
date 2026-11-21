@@ -25,9 +25,7 @@
     var(--background);
 }
 .example { width: min(100%, 310px); }
-.exampleIcon { width: 33px; height: 33px; display: grid; place-items: center; margin-bottom: 5px; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--secondary); color: var(--accent); }
-.exampleActions { display: flex; flex-wrap: wrap; gap: 8px; }
-.details { padding: 16px 19px; }
+.exampleIcon { width: 33px; height: 33px; display: grid; place-items: center; margin-bottom: 5px; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--secondary); color: var(--accent); }.details { padding: 16px 19px; }
 .libraryTitle { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; }
 .libraryTitle h3 { margin: 0; font-size: 19px; line-height: 1.3; }
 .libraryTitle a { color: inherit; text-decoration: none; }

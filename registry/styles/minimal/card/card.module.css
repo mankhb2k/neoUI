@@ -1,6 +1,5 @@
 .card {
   box-sizing: border-box;
-  padding: 20px;
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
   background: var(--surface);
@@ -9,9 +8,17 @@
 .header {
   display: grid;
   gap: 7px;
-  padding-bottom: 16px;
+  padding: 20px;
   border-bottom: 1px solid var(--divider);
 }
-.title { margin: 0; font-size: 16px; font-weight: 650; letter-spacing: -.02em; }
-.description { margin: 0; color: var(--muted); line-height: 1.55; }
-.content { margin-top: 17px; padding-top: 13px; border-top: 1px solid var(--border); }
+.header > h3 { margin: 0; font-size: 16px; font-weight: 650; letter-spacing: -.02em; }
+.header > p { margin: 0; color: var(--muted); line-height: 1.55; }
+.content { padding: 20px; }
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--divider);
+}
