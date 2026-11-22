@@ -91,6 +91,7 @@
 .example > p { margin: 8px 0 18px; color: var(--muted); font-size: 14px; line-height: 1.65; }
 .example > p code { padding: 2px 6px; border-radius: 5px; background: var(--secondary); color: var(--foreground); font: 13px Consolas, monospace; }
 .exampleFrame { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.contextArea { display: grid; place-items: center; width: min(100%, 320px); height: 140px; border: 1px dashed var(--line); border-radius: 12px; color: var(--muted); font-size: 14px; user-select: none; }
 .exampleStage { min-height: 260px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; padding: 48px 24px; background: var(--inset, var(--background)); color: var(--foreground); }
 .sizePair { display: inline-flex; align-items: center; gap: 8px; }
 .codeBar { display: flex; justify-content: flex-end; padding: 8px 10px; border-top: 1px solid var(--line); }

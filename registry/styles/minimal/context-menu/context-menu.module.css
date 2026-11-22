@@ -1,0 +1,78 @@
+/* The panel is a popover, so it sits in the top layer. JavaScript sets top and left. */
+.content,
+.subContent {
+  box-sizing: border-box;
+  min-width: 200px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius-control) + 2px);
+  background: var(--surface);
+  color: var(--foreground);
+  box-shadow: 0 12px 32px #0006;
+  font-size: 13px;
+  outline: none;
+}
+.content {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  max-width: calc(100vw - 16px);
+  overflow: visible;
+}
+.content:popover-open { animation: menu-in 0.14s ease-out; }
+
+.sub { position: relative; }
+.subContent {
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: calc(100% + 4px);
+  min-width: 180px;
+  animation: menu-in 0.12s ease-out;
+}
+.subContent[data-flip] { left: auto; right: calc(100% + 4px); }
+/* Invisible bridge across the gap, so hovering from the trigger to the submenu stays inside it. */
+.subContent::before { content: ""; position: absolute; top: 0; bottom: 0; right: 100%; width: 12px; }
+.subContent[data-flip]::before { right: auto; left: 100%; }
+
+.item {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 32px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: calc(var(--radius-control) - 2px);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.item svg { flex: none; width: 16px; height: 16px; color: var(--muted); }
+.item:focus { background: color-mix(in srgb, var(--foreground) 8%, transparent); outline: none; }
+.item:disabled { opacity: 0.45; pointer-events: none; }
+.item > .chevron { margin-left: auto; width: 14px; height: 14px; }
+
+.item[data-variant="destructive"] { color: var(--destructive, #e5484d); }
+.item[data-variant="destructive"] svg { color: inherit; }
+.item[data-variant="destructive"]:focus { background: color-mix(in srgb, var(--destructive, #e5484d) 14%, transparent); }
+
+.label { padding: 6px 8px; color: var(--muted); font-size: 12px; font-weight: 500; }
+.separator { height: 1px; margin: 4px -4px; background: var(--divider); }
+.shortcut { margin-left: auto; padding-left: 16px; color: var(--muted); font-size: 12px; letter-spacing: 0.04em; }
+
+@keyframes menu-in {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .content:popover-open, .subContent { animation: none; }
+}
+
+/* The area that opens the menu. Give it a size and a look in your app. */
+.trigger { user-select: none; -webkit-touch-callout: none; }
+.trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

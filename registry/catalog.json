@@ -108,6 +108,16 @@
         "select/select.tsx",
         "select/select.module.css"
       ]
+    },
+    {
+      "name": "context-menu",
+      "label": "Context Menu",
+      "description": "A menu that opens at the pointer on right click, with items, labels, shortcuts, submenus and destructive items.",
+      "category": "Overlays",
+      "files": [
+        "context-menu/context-menu.tsx",
+        "context-menu/context-menu.module.css"
+      ]
     }
   ]
 }

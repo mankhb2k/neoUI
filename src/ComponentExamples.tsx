@@ -16,6 +16,8 @@ type Kit = Pick<
   | "DropdownMenu" | "DropdownMenuTrigger" | "DropdownMenuContent" | "DropdownMenuLabel" | "DropdownMenuItem"
   | "DropdownMenuSeparator" | "DropdownMenuShortcut" | "DropdownMenuSub" | "DropdownMenuSubTrigger" | "DropdownMenuSubContent"
   | "Select" | "SelectTrigger" | "SelectValue" | "SelectContent" | "SelectItem" | "SelectLabel" | "SelectSeparator"
+  | "ContextMenu" | "ContextMenuTrigger" | "ContextMenuContent" | "ContextMenuLabel" | "ContextMenuItem"
+  | "ContextMenuSeparator" | "ContextMenuShortcut" | "ContextMenuSub" | "ContextMenuSubTrigger" | "ContextMenuSubContent"
 >;
 
 type Example = {
@@ -956,6 +958,159 @@ const countries = [
   },
 ];
 
+const contextMenuExamples: Example[] = [
+  {
+    id: "basic",
+    title: "Basic",
+    description: <>Wrap the area that should open the menu in <code>ContextMenuTrigger</code>. Right click it, or press the Menu key.</>,
+    code: `import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+
+<ContextMenu>
+  <ContextMenuTrigger>Right click here</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuLabel>File</ContextMenuLabel>
+    <ContextMenuItem>Open</ContextMenuItem>
+    <ContextMenuItem>Rename</ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem>Copy link</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>`,
+    render: ({ ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuLabel, ContextMenuItem, ContextMenuSeparator }) => (
+      <ContextMenu>
+        <ContextMenuTrigger className={css.contextArea}>Right click here</ContextMenuTrigger>
+        <ContextMenuContent>
+          <ContextMenuLabel>File</ContextMenuLabel>
+          <ContextMenuItem>Open</ContextMenuItem>
+          <ContextMenuItem>Rename</ContextMenuItem>
+          <ContextMenuSeparator />
+          <ContextMenuItem>Copy link</ContextMenuItem>
+        </ContextMenuContent>
+      </ContextMenu>
+    ),
+  },
+  {
+    id: "submenu",
+    title: "Submenu",
+    description: <>Wrap a <code>ContextMenuSubTrigger</code> and a <code>ContextMenuSubContent</code> in <code>ContextMenuSub</code>.</>,
+    code: `import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+
+<ContextMenu>
+  <ContextMenuTrigger>Right click here</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Back</ContextMenuItem>
+    <ContextMenuItem>Reload</ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuSub>
+      <ContextMenuSubTrigger>Share</ContextMenuSubTrigger>
+      <ContextMenuSubContent>
+        <ContextMenuItem>Email link</ContextMenuItem>
+        <ContextMenuItem>Messages</ContextMenuItem>
+      </ContextMenuSubContent>
+    </ContextMenuSub>
+  </ContextMenuContent>
+</ContextMenu>`,
+    render: ({ ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuSub, ContextMenuSubTrigger, ContextMenuSubContent }) => (
+      <ContextMenu>
+        <ContextMenuTrigger className={css.contextArea}>Right click here</ContextMenuTrigger>
+        <ContextMenuContent>
+          <ContextMenuItem>Back</ContextMenuItem>
+          <ContextMenuItem>Reload</ContextMenuItem>
+          <ContextMenuSeparator />
+          <ContextMenuSub>
+            <ContextMenuSubTrigger>Share</ContextMenuSubTrigger>
+            <ContextMenuSubContent>
+              <ContextMenuItem>Email link</ContextMenuItem>
+              <ContextMenuItem>Messages</ContextMenuItem>
+            </ContextMenuSubContent>
+          </ContextMenuSub>
+        </ContextMenuContent>
+      </ContextMenu>
+    ),
+  },
+  {
+    id: "shortcuts",
+    title: "Shortcuts",
+    description: <>Add <code>ContextMenuShortcut</code> inside an item to show its keyboard shortcut.</>,
+    code: `import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+
+<ContextMenu>
+  <ContextMenuTrigger>Right click here</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>
+      Copy
+      <ContextMenuShortcut>⌘C</ContextMenuShortcut>
+    </ContextMenuItem>
+    <ContextMenuItem>
+      Paste
+      <ContextMenuShortcut>⌘V</ContextMenuShortcut>
+    </ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>`,
+    render: ({ ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuShortcut }) => (
+      <ContextMenu>
+        <ContextMenuTrigger className={css.contextArea}>Right click here</ContextMenuTrigger>
+        <ContextMenuContent>
+          <ContextMenuItem>Copy<ContextMenuShortcut>⌘C</ContextMenuShortcut></ContextMenuItem>
+          <ContextMenuItem>Paste<ContextMenuShortcut>⌘V</ContextMenuShortcut></ContextMenuItem>
+        </ContextMenuContent>
+      </ContextMenu>
+    ),
+  },
+  {
+    id: "destructive",
+    title: "Destructive",
+    description: <>Use <code>variant=&quot;destructive&quot;</code> on an item that deletes or permanently changes data.</>,
+    code: `import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+
+<ContextMenu>
+  <ContextMenuTrigger>Right click here</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Duplicate</ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>`,
+    render: ({ ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator }) => (
+      <ContextMenu>
+        <ContextMenuTrigger className={css.contextArea}>Right click here</ContextMenuTrigger>
+        <ContextMenuContent>
+          <ContextMenuItem>Duplicate</ContextMenuItem>
+          <ContextMenuSeparator />
+          <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
+        </ContextMenuContent>
+      </ContextMenu>
+    ),
+  },
+];
+
 const exampleSets: Record<string, Example[]> = {
   button: buttonExamples,
   card: cardExamples,
@@ -964,6 +1119,7 @@ const exampleSets: Record<string, Example[]> = {
   tabs: tabsExamples,
   "dropdown-menu": dropdownMenuExamples,
   select: selectExamples,
+  "context-menu": contextMenuExamples,
 };
 
 
