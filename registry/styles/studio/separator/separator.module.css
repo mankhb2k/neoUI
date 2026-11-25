@@ -1,0 +1,15 @@
+.separator {
+  --separator-size: 1px;
+  flex: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--separator-size);
+  background: var(--divider);
+}
+
+/* variant="vertical": a column that fills the height of a flex row */
+.vertical {
+  width: var(--separator-size);
+  height: auto;
+  align-self: stretch;
+}

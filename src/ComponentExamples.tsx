@@ -18,6 +18,7 @@ type Kit = Pick<
   | "Select" | "SelectTrigger" | "SelectValue" | "SelectContent" | "SelectItem" | "SelectLabel" | "SelectSeparator"
   | "ContextMenu" | "ContextMenuTrigger" | "ContextMenuContent" | "ContextMenuLabel" | "ContextMenuItem"
   | "ContextMenuSeparator" | "ContextMenuShortcut" | "ContextMenuSub" | "ContextMenuSubTrigger" | "ContextMenuSubContent"
+  | "Separator"
 >;
 
 type Example = {
@@ -1111,6 +1112,68 @@ const contextMenuExamples: Example[] = [
   },
 ];
 
+const separatorExamples: Example[] = [
+  {
+    id: "horizontal",
+    title: "Horizontal",
+    description: <>The default <code>Separator</code> is a horizontal line that spans the width of its container.</>,
+    code: `import { Separator } from "@/components/ui/separator"
+
+<div>
+  <p>Account settings</p>
+  <Separator />
+  <p>Notifications</p>
+</div>`,
+    render: ({ Separator }) => (
+      <div className={css.exampleCard}>
+        <p>Account settings</p>
+        <Separator />
+        <p>Notifications</p>
+      </div>
+    ),
+  },
+  {
+    id: "vertical",
+    title: "Vertical",
+    description: <>Use <code>variant=&quot;vertical&quot;</code> to divide items in a row. The line stretches to the height of the row.</>,
+    code: `import { Separator } from "@/components/ui/separator"
+
+<div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+  <span>Docs</span>
+  <Separator variant="vertical" />
+  <span>Components</span>
+  <Separator variant="vertical" />
+  <span>Blog</span>
+</div>`,
+    render: ({ Separator }) => (
+      <div className={css.separatorRow}>
+        <span>Docs</span>
+        <Separator variant="vertical" />
+        <span>Components</span>
+        <Separator variant="vertical" />
+        <span>Blog</span>
+      </div>
+    ),
+  },
+  {
+    id: "size",
+    title: "Size",
+    description: <>Use <code>size</code> to set the thickness in pixels. The default is <code>1</code>.</>,
+    code: `import { Separator } from "@/components/ui/separator"
+
+<Separator />
+<Separator size={2} />
+<Separator size={4} />`,
+    render: ({ Separator }) => (
+      <div className={css.exampleInput}>
+        <Separator />
+        <Separator size={2} />
+        <Separator size={4} />
+      </div>
+    ),
+  },
+];
+
 const exampleSets: Record<string, Example[]> = {
   button: buttonExamples,
   card: cardExamples,
@@ -1120,6 +1183,7 @@ const exampleSets: Record<string, Example[]> = {
   "dropdown-menu": dropdownMenuExamples,
   select: selectExamples,
   "context-menu": contextMenuExamples,
+  separator: separatorExamples,
 };
 
 

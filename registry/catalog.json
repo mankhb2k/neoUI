@@ -118,6 +118,16 @@
         "context-menu/context-menu.tsx",
         "context-menu/context-menu.module.css"
       ]
+    },
+    {
+      "name": "separator",
+      "label": "Separator",
+      "description": "A thin line that divides content. Horizontal by default, with variant=\"vertical\" for a divider between items in a row.",
+      "category": "Layout",
+      "files": [
+        "separator/separator.tsx",
+        "separator/separator.module.css"
+      ]
     }
   ]
 }

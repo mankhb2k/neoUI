@@ -94,6 +94,7 @@
 .contextArea { display: grid; place-items: center; width: min(100%, 320px); height: 140px; border: 1px dashed var(--line); border-radius: 12px; color: var(--muted); font-size: 14px; user-select: none; }
 .exampleStage { min-height: 260px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; padding: 48px 24px; background: var(--inset, var(--background)); color: var(--foreground); }
 .sizePair { display: inline-flex; align-items: center; gap: 8px; }
+.separatorRow { display: flex; align-items: center; gap: 12px; height: 24px; }
 .codeBar { display: flex; justify-content: flex-end; padding: 8px 10px; border-top: 1px solid var(--line); }
 .viewCode { display: inline-flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 11px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface); color: var(--foreground); font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
 .viewCode:hover { background: color-mix(in srgb, var(--foreground) 5%, var(--surface)); border-color: color-mix(in srgb, var(--foreground) 15%, transparent); }
