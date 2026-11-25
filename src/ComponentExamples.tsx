@@ -18,7 +18,7 @@ type Kit = Pick<
   | "Select" | "SelectTrigger" | "SelectValue" | "SelectContent" | "SelectItem" | "SelectLabel" | "SelectSeparator"
   | "ContextMenu" | "ContextMenuTrigger" | "ContextMenuContent" | "ContextMenuLabel" | "ContextMenuItem"
   | "ContextMenuSeparator" | "ContextMenuShortcut" | "ContextMenuSub" | "ContextMenuSubTrigger" | "ContextMenuSubContent"
-  | "Separator"
+  | "Separator" | "Checkbox" | "Pagination"
 >;
 
 type Example = {
@@ -1174,6 +1174,158 @@ const separatorExamples: Example[] = [
   },
 ];
 
+function SelectAllCheckboxes({ Checkbox }: { Checkbox: Kit["Checkbox"] }) {
+  const options = ["Email", "SMS", "Push"];
+  const [selected, setSelected] = useState<string[]>(["Email"]);
+  const allSelected = selected.length === options.length;
+  const someSelected = selected.length > 0 && !allSelected;
+
+  return (
+    <div className={css.exampleInput}>
+      <label className={css.checkRow}>
+        <Checkbox
+          checked={allSelected}
+          indeterminate={someSelected}
+          onChange={() => setSelected(allSelected ? [] : options)}
+        />
+        Select all
+      </label>
+      <div className={css.checkGroup}>
+        {options.map((option) => (
+          <label key={option} className={css.checkRow}>
+            <Checkbox
+              checked={selected.includes(option)}
+              onChange={() =>
+                setSelected((current) =>
+                  current.includes(option) ? current.filter((item) => item !== option) : [...current, option],
+                )
+              }
+            />
+            {option}
+          </label>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const checkboxExamples: Example[] = [
+  {
+    id: "default",
+    title: "Default",
+    description: <>Wrap <code>Checkbox</code> in a <code>label</code> so the text next to it is clickable too.</>,
+    code: `import { Checkbox } from "@/components/ui/checkbox"
+
+<label>
+  <Checkbox defaultChecked />
+  Email me product updates
+</label>
+<label>
+  <Checkbox />
+  Send me a weekly digest
+</label>`,
+    render: ({ Checkbox }) => (
+      <div className={css.exampleInput}>
+        <label className={css.checkRow}>
+          <Checkbox defaultChecked />
+          Email me product updates
+        </label>
+        <label className={css.checkRow}>
+          <Checkbox />
+          Send me a weekly digest
+        </label>
+      </div>
+    ),
+  },
+  {
+    id: "disabled",
+    title: "Disabled",
+    description: <>Add the <code>disabled</code> attribute to block changes.</>,
+    code: `import { Checkbox } from "@/components/ui/checkbox"
+
+<label>
+  <Checkbox defaultChecked disabled />
+  Required for your plan
+</label>`,
+    render: ({ Checkbox }) => (
+      <div className={css.exampleInput}>
+        <label className={css.checkRow}>
+          <Checkbox defaultChecked disabled />
+          Required for your plan
+        </label>
+      </div>
+    ),
+  },
+  {
+    id: "indeterminate",
+    title: "Indeterminate",
+    description: <>Use <code>indeterminate</code> on a parent checkbox when only some of its children are selected. Clicking it selects or clears all of them.</>,
+    code: `import { useState } from "react"
+import { Checkbox } from "@/components/ui/checkbox"
+
+const options = ["Email", "SMS", "Push"]
+
+const [selected, setSelected] = useState<string[]>(["Email"])
+const allSelected = selected.length === options.length
+const someSelected = selected.length > 0 && !allSelected
+
+<label>
+  <Checkbox
+    checked={allSelected}
+    indeterminate={someSelected}
+    onChange={() => setSelected(allSelected ? [] : options)}
+  />
+  Select all
+</label>`,
+    render: ({ Checkbox }) => <SelectAllCheckboxes Checkbox={Checkbox} />,
+  },
+];
+
+function ControlledPagination({ Pagination }: { Pagination: Kit["Pagination"] }) {
+  const [page, setPage] = useState(3);
+
+  return (
+    <div className={css.paginationDemo}>
+      <Pagination page={page} pageCount={12} onPageChange={setPage} />
+      <p>Page {page} of 12</p>
+    </div>
+  );
+}
+
+const paginationExamples: Example[] = [
+  {
+    id: "default",
+    title: "Default",
+    description: <>Set <code>pageCount</code> to the number of pages. The first page is selected when the component first renders.</>,
+    code: `import { Pagination } from "@/components/ui/pagination"
+
+<Pagination pageCount={5} />`,
+    render: ({ Pagination }) => <Pagination pageCount={5} />,
+  },
+  {
+    id: "long-list",
+    title: "Long list",
+    description: <>With many pages, the component shows the first and last page and the pages around the current one. Gaps are shown as an ellipsis. Use <code>siblingCount</code> to change how many pages are shown on each side.</>,
+    code: `import { Pagination } from "@/components/ui/pagination"
+
+<Pagination defaultPage={10} pageCount={20} siblingCount={1} />`,
+    render: ({ Pagination }) => <Pagination defaultPage={10} pageCount={20} siblingCount={1} />,
+  },
+  {
+    id: "controlled",
+    title: "Controlled",
+    description: <>Pass <code>page</code> and <code>onPageChange</code> to control the current page from your own state.</>,
+    code: `import { useState } from "react"
+import { Pagination } from "@/components/ui/pagination"
+
+const [page, setPage] = useState(3)
+
+<Pagination page={page} pageCount={12} onPageChange={setPage} />
+<p>Page {page} of 12</p>`,
+    render: ({ Pagination }) => <ControlledPagination Pagination={Pagination} />,
+  },
+];
+
 const exampleSets: Record<string, Example[]> = {
   button: buttonExamples,
   card: cardExamples,
@@ -1184,6 +1336,8 @@ const exampleSets: Record<string, Example[]> = {
   select: selectExamples,
   "context-menu": contextMenuExamples,
   separator: separatorExamples,
+  checkbox: checkboxExamples,
+  pagination: paginationExamples,
 };
 
 

@@ -25,9 +25,15 @@ import * as StudioContextMenu from "../registry/styles/studio/context-menu/conte
 import * as ObsidianSeparator from "../registry/styles/obsidian/separator/separator";
 import * as MinimalSeparator from "../registry/styles/minimal/separator/separator";
 import * as StudioSeparator from "../registry/styles/studio/separator/separator";
+import * as ObsidianCheckbox from "../registry/styles/obsidian/checkbox/checkbox";
+import * as MinimalCheckbox from "../registry/styles/minimal/checkbox/checkbox";
+import * as StudioCheckbox from "../registry/styles/studio/checkbox/checkbox";
+import * as ObsidianPagination from "../registry/styles/obsidian/pagination/pagination";
+import * as MinimalPagination from "../registry/styles/minimal/pagination/pagination";
+import * as StudioPagination from "../registry/styles/studio/pagination/pagination";
 
 export const previewComponents = {
-  obsidian: { ...ObsidianButton, ...ObsidianCard, ...ObsidianInput, ...ObsidianDialog, ...ObsidianTabs, ...ObsidianDropdownMenu, ...ObsidianSelect, ...ObsidianContextMenu, ...ObsidianSeparator },
-  minimal: { ...MinimalButton, ...MinimalCard, ...MinimalInput, ...MinimalDialog, ...MinimalTabs, ...MinimalDropdownMenu, ...MinimalSelect, ...MinimalContextMenu, ...MinimalSeparator },
-  studio: { ...StudioButton, ...StudioCard, ...StudioInput, ...StudioDialog, ...StudioTabs, ...StudioDropdownMenu, ...StudioSelect, ...StudioContextMenu, ...StudioSeparator },
+  obsidian: { ...ObsidianButton, ...ObsidianCard, ...ObsidianInput, ...ObsidianDialog, ...ObsidianTabs, ...ObsidianDropdownMenu, ...ObsidianSelect, ...ObsidianContextMenu, ...ObsidianSeparator, ...ObsidianCheckbox, ...ObsidianPagination },
+  minimal: { ...MinimalButton, ...MinimalCard, ...MinimalInput, ...MinimalDialog, ...MinimalTabs, ...MinimalDropdownMenu, ...MinimalSelect, ...MinimalContextMenu, ...MinimalSeparator, ...MinimalCheckbox, ...MinimalPagination },
+  studio: { ...StudioButton, ...StudioCard, ...StudioInput, ...StudioDialog, ...StudioTabs, ...StudioDropdownMenu, ...StudioSelect, ...StudioContextMenu, ...StudioSeparator, ...StudioCheckbox, ...StudioPagination },
 };

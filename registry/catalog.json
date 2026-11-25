@@ -120,6 +120,26 @@
       ]
     },
     {
+      "name": "pagination",
+      "label": "Pagination",
+      "description": "Move between pages with previous and next buttons and numbered pages, with ellipsis for long lists.",
+      "category": "Navigation",
+      "files": [
+        "pagination/pagination.tsx",
+        "pagination/pagination.module.css"
+      ]
+    },
+    {
+      "name": "checkbox",
+      "label": "Checkbox",
+      "description": "Choose one or more options with a box, with an indeterminate state for a group that is partly selected.",
+      "category": "Forms",
+      "files": [
+        "checkbox/checkbox.tsx",
+        "checkbox/checkbox.module.css"
+      ]
+    },
+    {
       "name": "separator",
       "label": "Separator",
       "description": "A thin line that divides content. Horizontal by default, with variant=\"vertical\" for a divider between items in a row.",
