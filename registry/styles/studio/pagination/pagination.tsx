@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type HTMLAttributes } from "react";
+import { Button } from "../button/button";
 import styles from "./pagination.module.css";
 
 type PageItem = number | "ellipsis";
@@ -59,36 +60,36 @@ export function Pagination({
 
   return (
     <nav aria-label="Pagination" {...props} className={[styles.pagination, className].filter(Boolean).join(" ")}>
-      <button type="button" className={styles.control} disabled={current <= 1} onClick={() => go(current - 1)}>
-        <svg className={styles.icon} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <Button variant="outline" disabled={current <= 1} onClick={() => go(current - 1)}>
+        <svg data-icon="inline-start" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="m15 18-6-6 6-6" />
         </svg>
         Previous
-      </button>
+      </Button>
       <div className={styles.pages}>
         {getPageItems(current, total, siblingCount).map((item, index) =>
           item === "ellipsis" ? (
             <span key={`ellipsis-${index}`} className={styles.ellipsis} aria-hidden="true">…</span>
           ) : (
-            <button
+            <Button
               key={item}
-              type="button"
+              variant={item === current ? "default" : "ghost"}
               className={styles.page}
               aria-label={`Page ${item}`}
               aria-current={item === current ? "page" : undefined}
               onClick={() => go(item)}
             >
               {item}
-            </button>
+            </Button>
           ),
         )}
       </div>
-      <button type="button" className={styles.control} disabled={current >= total} onClick={() => go(current + 1)}>
+      <Button variant="outline" disabled={current >= total} onClick={() => go(current + 1)}>
         Next
-        <svg className={styles.icon} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <svg data-icon="inline-end" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="m9 18 6-6-6-6" />
         </svg>
-      </button>
+      </Button>
     </nav>
   );
 }
