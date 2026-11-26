@@ -76,7 +76,7 @@ export async function Catalog({ style, page }: { style: CatalogStyle; page: stri
             <>
               <TokenPalette style={style} />
               <CodePanel key={style.name} files={sourceFiles} />
-              <p className={css.usage}>Add this CSS to <code>app/globals.css</code>, then set <code>data-neo-style="{style.name}"</code> on <code>&lt;html&gt;</code> or a wrapper around your components.</p>
+              <p className={css.usage}>Add this CSS to <code>app/globals.css</code>, then set <code>data-style="{style.name}"</code> on <code>&lt;html&gt;</code> or a wrapper around your components.</p>
             </>
           )}
 

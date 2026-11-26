@@ -68,9 +68,9 @@ function createProjectTokens(style, defaultMode) {
     ? ':root:not([data-theme]), :root[data-theme="dark"]'
     : ':root:not([data-theme]), :root[data-theme="light"]';
   return readFile(tokenUrl, "utf8").then((source) => source
-    .replace(/\[data-neo-style="[^"]+"\]\[data-theme="light"\]/g,
+    .replace(/\[data-style="[^"]+"\]\[data-theme="light"\]/g,
       defaultMode === "light" ? defaultSelector : ':root[data-theme="light"]')
-    .replace(/\[data-neo-style="[^"]+"\]\[data-theme="dark"\]/g,
+    .replace(/\[data-style="[^"]+"\]\[data-theme="dark"\]/g,
       defaultMode === "dark" ? defaultSelector : ':root[data-theme="dark"]'));
 }
 

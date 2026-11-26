@@ -1,4 +1,4 @@
-[data-neo-style="obsidian"][data-theme="light"] {
+[data-style="obsidian"][data-theme="light"] {
   color-scheme: light;
   --background: #f5f7fa;
   --surface: #ffffff;
@@ -14,7 +14,7 @@
   --radius-card: 14px;
 }
 
-[data-neo-style="obsidian"][data-theme="dark"] {
+[data-style="obsidian"][data-theme="dark"] {
   color-scheme: dark;
   --background: #09090b;
   --surface: #262626;

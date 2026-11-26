@@ -1347,7 +1347,7 @@ export function ComponentExamples({ style, page }: { style: CatalogStyle; page: 
   const examples = (exampleSets[page] ?? []).filter((example) => !example.styles || example.styles.includes(style.name));
 
   return (
-    <div className={css.docs} data-neo-style={style.name} data-theme={mode}>
+    <div className={css.docs} data-style={style.name} data-theme={mode}>
       {examples.map((example) => (
         <ExampleBlock key={example.id} example={example} kit={kit} />
       ))}
