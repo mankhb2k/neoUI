@@ -149,7 +149,7 @@ async function addComponent(name, options) {
   // Also install the components that the selected ones import, such as Button for Pagination.
   const wanted = new Map(selected.map((component) => [component.name, component]));
   for (const component of wanted.values()) {
-    for (const dependency of component.dependencies ?? []) {
+    for (const dependency of component.registryDependencies ?? []) {
       if (wanted.has(dependency)) continue;
       const found = catalog.components.find((entry) => entry.name === dependency);
       if (!found) throw new Error(`${component.name} needs ${dependency}, but it is not in the registry.`);

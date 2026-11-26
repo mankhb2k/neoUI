@@ -124,7 +124,7 @@
       "label": "Pagination",
       "description": "Move between pages with previous and next buttons and numbered pages, with ellipsis for long lists.",
       "category": "Navigation",
-      "dependencies": ["button"],
+      "registryDependencies": ["button"],
       "files": [
         "pagination/pagination.tsx",
         "pagination/pagination.module.css"
