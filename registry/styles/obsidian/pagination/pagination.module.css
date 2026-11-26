@@ -1,0 +1,26 @@
+.pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pages {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Page numbers are square Buttons. Two classes, so this wins over the Button size padding. */
+.pages > .page {
+  min-width: 36px;
+  padding: 0;
+}
+
+.ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  color: var(--muted);
+}

@@ -10,7 +10,7 @@ export function TokenPalette({ style }: { style: CatalogStyle }) {
   const mode = useThemeStore((state) => state.mode);
 
   return (
-    <div className={css.tokenPalette} data-neo-style={style.name} data-theme={mode}>
+    <div className={css.tokenPalette} data-style={style.name} data-theme={mode}>
       {tokens.map((token) => (
         <div key={token}>
           <i style={{ background: `var(--${token})` }} />

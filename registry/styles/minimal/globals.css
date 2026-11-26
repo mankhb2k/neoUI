@@ -1,4 +1,4 @@
-[data-neo-style="minimal"][data-theme="light"] {
+[data-style="minimal"][data-theme="light"] {
   color-scheme: light;
   --background: #f5f5f5;
   --surface: #ffffff;
@@ -14,7 +14,7 @@
   --radius-card: 6px;
 }
 
-[data-neo-style="minimal"][data-theme="dark"] {
+[data-style="minimal"][data-theme="dark"] {
   color-scheme: dark;
   --background: #121212;
   --surface: #1c1c1c;

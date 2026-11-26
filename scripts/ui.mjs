@@ -68,9 +68,9 @@ function createProjectTokens(style, defaultMode) {
     ? ':root:not([data-theme]), :root[data-theme="dark"]'
     : ':root:not([data-theme]), :root[data-theme="light"]';
   return readFile(tokenUrl, "utf8").then((source) => source
-    .replace(/\[data-neo-style="[^"]+"\]\[data-theme="light"\]/g,
+    .replace(/\[data-style="[^"]+"\]\[data-theme="light"\]/g,
       defaultMode === "light" ? defaultSelector : ':root[data-theme="light"]')
-    .replace(/\[data-neo-style="[^"]+"\]\[data-theme="dark"\]/g,
+    .replace(/\[data-style="[^"]+"\]\[data-theme="dark"\]/g,
       defaultMode === "dark" ? defaultSelector : ':root[data-theme="dark"]'));
 }
 
@@ -99,10 +99,16 @@ async function init(options) {
 }
 
 async function installFiles(files, destination) {
-  const targets = files.map((file) => ({
-    source: new URL(`../registry/styles/${file.style}/${file.name}`, import.meta.url),
-    target: path.join(destination, file.name),
-  }));
+  const targets = [];
+  for (const file of files) {
+    const target = path.join(destination, file.name);
+    // A dependency that is already installed is kept as it is.
+    if (file.optional && await pathExists(target)) continue;
+    targets.push({
+      source: new URL(`../registry/styles/${file.style}/${file.name}`, import.meta.url),
+      target,
+    });
+  }
 
   for (const { target } of targets) {
     if (await pathExists(target)) {
@@ -140,8 +146,22 @@ async function addComponent(name, options) {
     throw new Error(name ? `Unknown component: ${name}. Run neonix list to see available components.` : "Choose a component or use --all.");
   }
 
+  // Also install the components that the selected ones import, such as Button for Pagination.
+  const wanted = new Map(selected.map((component) => [component.name, component]));
+  for (const component of wanted.values()) {
+    for (const dependency of component.registryDependencies ?? []) {
+      if (wanted.has(dependency)) continue;
+      const found = catalog.components.find((entry) => entry.name === dependency);
+      if (!found) throw new Error(`${component.name} needs ${dependency}, but it is not in the registry.`);
+      wanted.set(dependency, found);
+    }
+  }
+  const requested = new Set(selected.map((component) => component.name));
+
   await installFiles(
-    selected.flatMap((component) => component.files.map((file) => ({ style, name: file }))),
+    [...wanted.values()].flatMap((component) =>
+      component.files.map((file) => ({ style, name: file, optional: !requested.has(component.name) })),
+    ),
     path.resolve("components/ui"),
   );
 }

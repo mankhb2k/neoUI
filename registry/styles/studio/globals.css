@@ -1,4 +1,4 @@
-[data-neo-style="studio"][data-theme="light"] {
+[data-style="studio"][data-theme="light"] {
   color-scheme: light;
   --background: #fafafa;
   --surface: #ffffff;
@@ -15,7 +15,7 @@
   --radius-card: 18px;
 }
 
-[data-neo-style="studio"][data-theme="dark"] {
+[data-style="studio"][data-theme="dark"] {
   color-scheme: dark;
   --background: #09090b;
   --surface: #262626;

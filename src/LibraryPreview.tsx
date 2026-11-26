@@ -12,7 +12,7 @@ export function LibraryPreview({ style }: { style: CatalogStyle }) {
     previewComponents[style.name as keyof typeof previewComponents];
 
   return (
-    <div className={css.preview} data-neo-style={style.name} data-theme={mode} inert>
+    <div className={css.preview} data-style={style.name} data-theme={mode} inert>
       <Card className={css.example}>
         <CardHeader>
           <span className={css.exampleIcon}><Layers2 size={17} aria-hidden="true" /></span>

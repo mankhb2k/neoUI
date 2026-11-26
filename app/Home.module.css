@@ -19,7 +19,7 @@
     radial-gradient(circle, color-mix(in srgb, var(--foreground) 17%, transparent) 1px, transparent 1px) 0 0 / 18px 18px,
     var(--background);
 }
-.preview[data-neo-style="minimal"] {
+.preview[data-style="minimal"] {
   background:
     radial-gradient(circle, color-mix(in srgb, var(--foreground) 12%, transparent) 1px, transparent 1px) 0 0 / 18px 18px,
     var(--background);

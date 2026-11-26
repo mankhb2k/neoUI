@@ -1,0 +1,49 @@
+.checkbox {
+  appearance: none;
+  box-sizing: border-box;
+  display: inline-grid;
+  flex: none;
+  place-content: center;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius-control) / 2);
+  background: var(--surface);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* The check mark is drawn with borders and rotated. It scales in and out when checked changes. */
+.checkbox::after {
+  content: "";
+  box-sizing: border-box;
+  width: 5px;
+  height: 9px;
+  margin-top: -2px;
+  border: solid var(--accent-foreground);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.15s ease;
+}
+
+.checkbox:hover:not(:disabled) { border-color: var(--accent); }
+.checkbox:checked,
+.checkbox:indeterminate { background: var(--accent); border-color: var(--accent); }
+.checkbox:checked::after { transform: rotate(45deg) scale(1); }
+
+/* indeterminate: a dash instead of a check */
+.checkbox:indeterminate::after {
+  width: 9px;
+  height: 0;
+  margin: 0;
+  border-width: 2px 0 0;
+  transform: scale(1);
+}
+
+.checkbox:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.checkbox:disabled { opacity: 0.5; cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  .checkbox, .checkbox::after { transition: none; }
+}
